@@ -16,20 +16,21 @@ public class PlayerData : MonoBehaviour {
     }
 
     private void Start() {
-        currentHealth = maxHealth * 0.75f;
+        ChangeHealth(maxHealth * 0.75f);
     }
 
     private void Update() {
-        currentHealth -= healthLoss * Time.deltaTime;
+        ChangeHealth(-healthLoss * Time.deltaTime);
         if (currentHealth <= 0) Die();
     }
 
     public void ChangeHealth(float changeAmount) {
         currentHealth += changeAmount;
+        HudManager.Instance.ChangeHealthBarFill(currentHealth / maxHealth);
     }
 
     private void Die() {
-        Debug.Log("Player Died");
-        this.enabled = false;
+        Debug.Log("Player Died"); //
+        this.enabled = false; //
     }
 }
