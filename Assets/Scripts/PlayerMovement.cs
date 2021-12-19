@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _dragScreenPercentage;
     private float _dragDistance;
 
+    private bool _isMoving;
+
     private void Awake() {
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
@@ -46,18 +48,31 @@ public class PlayerMovement : MonoBehaviour {
                     float dragAngle = Mathf.Atan2(dragDirection.y, dragDirection.x) * Mathf.Rad2Deg;
                     if (dragAngle > 45 && dragAngle < 135) {
                         Debug.Log("Swiped Up"); //
-                        transform.position += Vector3.up; //
+                        if (!_isMoving) StartCoroutine(MoveTowardsHeight(2));
                         _isTrackingTouch = false;
                         return;
                     }
                     else if (dragAngle < -45 && dragAngle > -135) {
                         Debug.Log("Swiped Down"); //
-                        transform.position += Vector3.down; //
+                        if (!_isMoving) StartCoroutine(MoveTowardsHeight(-2));
                         _isTrackingTouch = false;
                     }
                 }
             }
         }
+    }
+
+    private IEnumerator MoveTowardsHeight(float direction) {
+        _isMoving = true;
+
+        // Direction should be called with the distance between each lane's pivot
+        for (int i = 0; i < 30; i++) {
+            transform.position += new Vector3(0, direction / 30, 0);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        _isMoving = false;
     }
 
 }
