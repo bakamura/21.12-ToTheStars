@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ControleCena {
-    public class TilesManager : MonoBehaviour {
+    public class TilesManagerOld : MonoBehaviour {
 
-        public static TilesManager Instance { get; private set; }
+        public static TilesManagerOld Instance { get; private set; }
         [SerializeField] private GameObject chaoPrefab;
         [SerializeField] private GameObject paredePrefab;
         [SerializeField] private GameObject coletavelPrefab;
@@ -20,7 +20,7 @@ namespace ControleCena {
         private void Awake() {
             if (Instance == null) {
                 Instance = this;
-                larguraPistas = chaoPrefab.GetComponent<TileScript>().GetLarguraPistas();
+                //larguraPistas = chaoPrefab.GetComponent<TileScript>().GetLarguraPistas();
                 chanceColetavel += chanceParede;
 
             }
@@ -70,15 +70,15 @@ namespace ControleCena {
         }
 
         private void GeraProps(TileScript script) {
-            foreach (Transform pontosDeProp in script.PontosDosProps) {
-                float r = Random.Range(0f, 101f);
-                if (r != 0) {
-                    if (r <= chanceParede)
-                        Instantiate(paredePrefab, pontosDeProp.position, Quaternion.identity, pontosDeProp);
-                    else if (r > chanceParede && r <= chanceColetavel)
-                        Instantiate(coletavelPrefab, pontosDeProp.position, Quaternion.identity, pontosDeProp);
-                }
-            }
+            //foreach (Transform pontosDeProp in script.PontosDosProps) {
+            //    float r = Random.Range(0f, 101f);
+            //    if (r != 0) {
+            //        if (r <= chanceParede)
+            //            Instantiate(paredePrefab, pontosDeProp.position, Quaternion.identity, pontosDeProp);
+            //        else if (r > chanceParede && r <= chanceColetavel)
+            //            Instantiate(coletavelPrefab, pontosDeProp.position, Quaternion.identity, pontosDeProp);
+            //    }
+            //}
         }
     }
 

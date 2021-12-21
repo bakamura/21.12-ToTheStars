@@ -79,11 +79,11 @@ public class movimentoJogador : MonoBehaviour {
     }
 
     private void TrocarPista(int novaPista) {
-        if (PistaAtual + novaPista < 0 || PistaAtual + novaPista > ControleCena.TilesManager.Instance.GetQntdDePistas() - 1) {
+        if (PistaAtual + novaPista < 0 || PistaAtual + novaPista > ControleCena.TilesManagerOld.Instance.GetQntdDePistas() - 1) {
             return;
         }
         PistaAtual += novaPista;
-        posicaoAlvo = new Vector3(transform.position.x + (novaPista * ControleCena.TilesManager.Instance.larguraPistas), posicaoAlvo.y, transform.position.z);
+        posicaoAlvo = new Vector3(transform.position.x + (novaPista * ControleCena.TilesManagerOld.Instance.larguraPistas), posicaoAlvo.y, transform.position.z);
         //if (novaPista > 0)
         //{
         //    
