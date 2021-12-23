@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SceneControl
-{
-    public class TilesManager : MonoBehaviour
-    {
+namespace SceneControl {
+
+    public class TilesManager : MonoBehaviour {
+    
         public static TilesManager Instance { get; private set; }
         [SerializeField] private GameObject _floorPrefab;
         [SerializeField] private GameObject _obstaclePrefab;
@@ -32,11 +32,13 @@ namespace SceneControl
             }
             for (int i = 0; i < _maxFloorsInScene; i++) CreateFloors(false);
         }
+
         public void CreateFloors(bool GenerateProps) {
             _currentInstantiatePosition = GetNewFloorSpawnPoint();
             GameObject gobj = Instantiate(_floorPrefab, _currentInstantiatePosition, Quaternion.identity);
             if (GenerateProps) CreateProps(gobj.GetComponent<TileScript>());
             DestroyFloors();
+
             //larguraChao = chaoPrefab.transform.localScale.x;
             //for (int i = 0; i < 3; i++)
             //{
@@ -48,15 +50,18 @@ namespace SceneControl
             //posDeCriacaoAtual = proxPontodeCriacao;
             //DestruirCenario();
         }
+
         private Vector2 GetNewFloorSpawnPoint() {
             if (_floorsInScene.Count > 0) return _currentInstantiatePosition = _floorsInScene[_floorsInScene.Count - 1].transform.Find("EndPoint").position + new Vector3(_floorsInScene[_floorsInScene.Count - 1].GetComponent<TileScript>().GetWidth() / 2f, 0, 0);
             else return Vector2.zero;
         }
+
         private void DestroyFloors() {
             if (_floorsInScene.Count > _maxFloorsInScene) {
                 Destroy(_floorsInScene[0]);
                 _floorsInScene.RemoveAt(0);
             }
+
             //if (TilesEmcena.Count > 9)
             //{
             //    for (int i = 0; i < 3; i++)// remove os ultimos 3 tiles criados
@@ -66,17 +71,21 @@ namespace SceneControl
             //    }
             //}
         }
+
         public void VelocityChange(float SpeedChange) {
             if (currentVelocity + SpeedChange > maxVelocity) currentVelocity = maxVelocity;
             else if (currentVelocity + SpeedChange < minVelocity) currentVelocity = minVelocity;
             else currentVelocity += SpeedChange;
         }
+
         public void AddInFloorsInSceneList(GameObject gobj) {
             _floorsInScene.Add(gobj);
         }
+
         public int GetNumbOfLanes() {
             return _nOfLanes;
         }
+
         private void CreateProps(TileScript script) {
             foreach(Transform spawnPoints in script.propsSpawnPoints) {
                 float random = Random.Range(0f,101f);
