@@ -31,6 +31,7 @@ public class PlayerData : MonoBehaviour {
 
     private void Die() {
         Debug.Log("Player Died"); //
+        MapGenerator.instance.isMoving = false;
         this.enabled = false; //
     }
 }

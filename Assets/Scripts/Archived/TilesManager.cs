@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SceneControl {
+//namespace SceneControl {
 
     public class TilesManager : MonoBehaviour {
     
@@ -97,5 +97,5 @@ namespace SceneControl {
         }
     }
 
-}
+//}
 
