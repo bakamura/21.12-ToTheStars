@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public static PlayerMovement Instance { get; private set; } = null;
 
+    [System.NonSerialized] public Rigidbody2D rbPlayer;
+
     private bool _isTrackingTouch = false;
     private Vector3 _touchInitialPos;
     private Vector3 _touchCurrentPos;
@@ -13,7 +15,9 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _dragScreenPercentage;
     private float _dragDistance;
 
+    [SerializeField] private float timeToSwitchLane;
     private bool _isMoving;
+    private float _targetHeight;
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -21,11 +25,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Start() {
+        rbPlayer = GetComponent<Rigidbody2D>();
         _dragDistance = Screen.height * _dragScreenPercentage;
     }
 
     private void Update() {
         DetectMovement();
+
     }
 
     private void DetectMovement() {
@@ -48,13 +54,13 @@ public class PlayerMovement : MonoBehaviour {
                     float dragAngle = Mathf.Atan2(dragDirection.y, dragDirection.x) * Mathf.Rad2Deg;
                     if (dragAngle > 45 && dragAngle < 135) {
                         Debug.Log("Swiped Up"); //
-                        if (!_isMoving) StartCoroutine(MoveTowardsHeight(2));
+                        if (!_isMoving && transform.position.y < 2) StartCoroutine(MoveTowardsHeight(true));
                         _isTrackingTouch = false;
                         return;
                     }
                     else if (dragAngle < -45 && dragAngle > -135) {
                         Debug.Log("Swiped Down"); //
-                        if (!_isMoving) StartCoroutine(MoveTowardsHeight(-2));
+                        if (!_isMoving && transform.position.y > -2) StartCoroutine(MoveTowardsHeight(false));
                         _isTrackingTouch = false;
                     }
                 }
@@ -62,16 +68,22 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private IEnumerator MoveTowardsHeight(float direction) {
+    private IEnumerator MoveTowardsHeight(bool isUpwards) {
         _isMoving = true;
 
         // Direction should be called with the distance between each lane's pivot
-        for (int i = 0; i < 30; i++) {
-            transform.position += new Vector3(0, direction / 30, 0);
+        rbPlayer.velocity = isUpwards ? (2 * Vector2.up / timeToSwitchLane) : (2 * Vector2.down / timeToSwitchLane);
 
-            yield return new WaitForSeconds(0.01f);
-        }
+        //for (int i = 0; i < 60; i++) { // WaitForSeconds doesn't properly work when float is too small
+        //    transform.position += new Vector3(0, direction / 60, 0);
 
+        //    yield return new WaitForSeconds(timeToSwitchLane);
+        //} 
+
+        yield return new WaitForSeconds(timeToSwitchLane);
+
+        rbPlayer.velocity = Vector2.zero;
+        transform.position = new Vector3(transform.position.x, (int)transform.position.y, 0);
         _isMoving = false;
     }
 

@@ -26,11 +26,13 @@ public class PlayerData : MonoBehaviour {
 
     public void ChangeHealth(float changeAmount) {
         _currentHealth += changeAmount;
+        if (_currentHealth > maxHealth) _currentHealth = maxHealth;
         HudManager.Instance.ChangeHealthBarFill(_currentHealth / maxHealth);
     }
 
     private void Die() {
         Debug.Log("Player Died"); //
+        PlayerMovement.Instance.enabled = false;
         MapGenerator.instance.isMoving = false;
         this.enabled = false; //
     }

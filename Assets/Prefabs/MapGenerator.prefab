@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _presetArea:
   - {fileID: 7668624778746343472, guid: 331a1491de21681429518d3be1a67e25, type: 3}
-  _spawnLocation: {x: 15, y: 0, z: 0}
+  _spawnLocation: {x: 36, y: 0, z: 0}
   _baseSpeed: 1
   speedMultiplier: 1
   _distanceToNewArea: 18

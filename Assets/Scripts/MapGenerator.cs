@@ -22,8 +22,8 @@ public class MapGenerator : MonoBehaviour {
 
     private void Start() {
         // Generates the first terrain and the upcoming one.
-        GenerateArea().transform.position = Vector3.zero;
-        GenerateArea();
+        GenerateArea().transform.position = new Vector3(9, 0, 0);
+        GenerateArea().transform.position = new Vector3(27, 0, 0);
     }
 
     private void FixedUpdate() {
@@ -39,6 +39,8 @@ public class MapGenerator : MonoBehaviour {
             }
             if (_currentAreas[_currentAreas.Count - 1].transform.position.x < _distanceToNewArea) GenerateArea().transform.position = _currentAreas[_currentAreas.Count - 2].transform.position + new Vector3(_distanceToNewArea, 0, 0);
         }
+
+        speedMultiplier += Time.fixedDeltaTime / 5; // Test
     }
 
     private GameObject GenerateArea() {
