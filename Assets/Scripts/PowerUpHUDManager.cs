@@ -18,17 +18,20 @@ public class PowerUpHUDManager : MonoBehaviour {
             _iconHeight = powerUpIconPrefab.GetComponent<RectTransform>().rect.height;
         }
     }
-    public void CreatePowerUpInUI(PowerUpScript _powerUpActivated) {
+    public bool CreatePowerUpInUI(PowerUpScript _powerUpActivated) {
         if (!_iconsInScene.ContainsKey((int)_powerUpActivated._powerUpType)){
             GameObject icon = Instantiate(powerUpIconPrefab, transform.position, Quaternion.identity, transform);
             icon.GetComponent<PowerUpHUDIconScript>().PowerUpIconSetup(_powerUpActivated._icon.sprite, _powerUpActivated._powerUpDuration, (int)_powerUpActivated._powerUpType, _powerUpActivated.EndAction);
             _iconsInScene.Add((int)_powerUpActivated._powerUpType, icon.GetComponent<PowerUpHUDIconScript>());
             _iconsPositions.Add(icon.GetComponent<RectTransform>());
+            UpdateIconsPositions();
+            return true;
         }
         else {
             _iconsInScene[(int)_powerUpActivated._powerUpType].ResetDuration();
+            UpdateIconsPositions();
+            return false;
         }
-        UpdateIconsPositions();
     }
     public void RemovePowerUpInUI(PowerUpHUDIconScript _powerUpFinished) {
         if (_iconsInScene.ContainsKey(_powerUpFinished.ID)){

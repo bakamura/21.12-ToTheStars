@@ -24,8 +24,7 @@ public class PowerUpScript : MonoBehaviour {
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player"){
-            PowerUpHUDManager.Instance.CreatePowerUpInUI(this);
-            OnCollectPowerUp.Invoke();
+            if (PowerUpHUDManager.Instance.CreatePowerUpInUI(this)) OnCollectPowerUp.Invoke();
             Destroy(this.gameObject);        
         }
     }
