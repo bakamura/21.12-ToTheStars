@@ -11,7 +11,7 @@ public class Obstacle : MonoBehaviour {
         if (collision.tag == "Player") {
             PlayerData.Instance.ChangeHealth(-_damage);
             //SceneControl.TilesManager.Instance.VelocityChange(-_velocityReduction);
-            Destroy(gameObject);
+            if(PlayerData.Instance.currentHealth > 0) Destroy(gameObject);
         }
 
     }

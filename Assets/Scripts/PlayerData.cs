@@ -7,7 +7,7 @@ public class PlayerData : MonoBehaviour {
     public static PlayerData Instance { get; private set; } = null;
 
     public float maxHealth;
-    private float _currentHealth;
+    [System.NonSerialized] public float currentHealth;
     public float healthLoss;
 
     private void Awake() {
@@ -21,13 +21,13 @@ public class PlayerData : MonoBehaviour {
 
     private void Update() {
         ChangeHealth(-healthLoss * Time.deltaTime);
-        if (_currentHealth <= 0) Die();
+        if (currentHealth <= 0) Die();
     }
 
     public void ChangeHealth(float changeAmount) {
-        _currentHealth += changeAmount;
-        if (_currentHealth > maxHealth) _currentHealth = maxHealth;
-        HudManager.Instance.ChangeHealthBarFill(_currentHealth / maxHealth);
+        currentHealth += changeAmount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        HudManager.Instance.ChangeHealthBarFill(currentHealth / maxHealth);
     }
 
     private void Die() {
