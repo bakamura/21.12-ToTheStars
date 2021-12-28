@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class PowerUpHUDIconScript : MonoBehaviour {
+public class PowerUpHUDIcon : MonoBehaviour {
 
     [NonSerialized] public int ID;
     [SerializeField] private Image _fillImage;
-    [SerializeField] private Image _backgroundImage;
+    [SerializeField] private Image _backgroundIconImage;
     [NonSerialized] public Action OnPowerUpEnd;
     private float _decreaseValue;
 
@@ -32,7 +32,7 @@ public class PowerUpHUDIconScript : MonoBehaviour {
         ID = id;
         OnPowerUpEnd = EndAction;
         _fillImage.sprite = icon;
-        _backgroundImage.sprite = icon;
+        _backgroundIconImage.sprite = icon;
         _decreaseValue = 1f / duration;
     }
 }

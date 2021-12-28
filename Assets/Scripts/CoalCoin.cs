@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoalScript : MonoBehaviour {
+public class CoalCoin : MonoBehaviour {
 
     [SerializeField] private float _lifeIncrease;
     //[SerializeField] private float _velocityIncrease;

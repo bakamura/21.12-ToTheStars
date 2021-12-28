@@ -34,6 +34,7 @@ public class PlayerData : MonoBehaviour {
         Debug.Log("Player Died"); //
         PlayerMovement.Instance.enabled = false;
         MapGenerator.instance.isMoving = false;
+        // Get PowerupHUD remove all icons.
         this.enabled = false; //
     }
 }
