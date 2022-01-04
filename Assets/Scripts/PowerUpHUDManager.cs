@@ -13,7 +13,7 @@ public class PowerUpHUDManager : MonoBehaviour {
     private float _iconWidith;
     private float _iconHeight;
     // As the key is an int, it works basicaly as a list (?)
-    private Dictionary<int, PowerUpHUDIcon> _iconsInScene = new Dictionary<int, PowerUpHUDIcon>();
+    [System.NonSerialized] public Dictionary<int, PowerUpHUDIcon> _iconsInScene = new Dictionary<int, PowerUpHUDIcon>();
     private List<RectTransform> _iconsPositions = new List<RectTransform>();
 
     private void Awake() {
@@ -41,16 +41,20 @@ public class PowerUpHUDManager : MonoBehaviour {
         }
     }
 
-    public void RemovePowerUpInUI(PowerUpHUDIcon _powerUpFinished) {
-        if (_iconsInScene.ContainsKey(_powerUpFinished.ID)) {
-            Destroy(_iconsInScene[_powerUpFinished.ID].gameObject);
-            _iconsInScene.Remove(_powerUpFinished.ID);
-            _iconsPositions.Remove(_powerUpFinished.GetComponent<RectTransform>());
+    public void RemovePowerUpInUI(int _powerUpFinished) {
+        if (_iconsInScene.ContainsKey(_powerUpFinished)) {
+            _iconsPositions.Remove(_iconsInScene[_powerUpFinished].GetComponent<RectTransform>());
+            Destroy(_iconsInScene[_powerUpFinished].gameObject);
+            _iconsInScene.Remove(_powerUpFinished);
             UpdateIconsPositions();
         }
         else Debug.Log("An error occurred whilist fetching ID");
     }
-
+    public void ClearUI() {
+        foreach (RectTransform icons in _iconsPositions) icons.gameObject.GetComponent<PowerUpHUDIcon>().ChangeDuration(-1);
+        _iconsInScene.Clear();
+        _iconsPositions.Clear();
+    }
     private void UpdateIconsPositions() {
         // Probably won't see use, but it's useful if it's ever needed.
         for (int currentIcon = 0; currentIcon < _iconsInScene.Count; currentIcon++) {

@@ -7,21 +7,27 @@ public class PowerUp : MonoBehaviour {
 
     [NonSerialized] public SpriteRenderer srPowerUp;
 
-    private const int _totalPowerUps = 2; // @
+    private const int _totalPowerUps = 5; // @
     public enum PowerUpType {
-        PowerUp1,
-        PowerUp2
+        Magnet,
+        PowderKeg,
+        Invincibility,
+        Shield,
+        CoinMultiplier
     };
     public PowerUpType _powerUpType;
     [SerializeField] private Sprite[] _iconsList = new Sprite[_totalPowerUps]; // @
-    [SerializeField] private float[] _durationsList = new float[_totalPowerUps]; // @
+    [SerializeField] private float[] _baseDurationsList = new float[_totalPowerUps]; // @
+    [SerializeField] private float _powderKegSpeedIncrease;
+    [NonSerialized] public static float maxSizePlayerIncreasePowderKeg = 3;
+    [SerializeField] private float _shieldDamageReduction;
+    [SerializeField] private int _coinMultiplier;
 
     // Functions similar to delegates, but writes simpler in code.
     private Action OnCollectPowerUp;
     [NonSerialized] public Action OnPowerUpExpires;
 
     [NonSerialized] public float powerUpDuration;
-
     private void Awake() {
         srPowerUp = GetComponent<SpriteRenderer>();
         PowerUpSetup();
@@ -35,9 +41,9 @@ public class PowerUp : MonoBehaviour {
     }
 
     public void PowerUpSetup() {
-        RandomizePowerUpType();
+        //RandomizePowerUpType();
         srPowerUp.sprite = _iconsList[(int)_powerUpType];
-        powerUpDuration = _durationsList[(int)_powerUpType];
+        powerUpDuration = _baseDurationsList[(int)_powerUpType];
         SetPowerUpActions();
     }
 
@@ -45,10 +51,19 @@ public class PowerUp : MonoBehaviour {
         int randomNumber = UnityEngine.Random.Range(0, _totalPowerUps * 2);
         switch (randomNumber) {
             case 0:
-                _powerUpType = PowerUpType.PowerUp1;
+                _powerUpType = PowerUpType.Magnet;
                 break;
             case 1:
-                _powerUpType = PowerUpType.PowerUp2;
+                _powerUpType = PowerUpType.PowderKeg;
+                break;
+            case 2:
+                _powerUpType = PowerUpType.Invincibility;
+                break;
+            case 3:
+                _powerUpType = PowerUpType.Shield;
+                break;
+            case 4:
+                _powerUpType = PowerUpType.CoinMultiplier;
                 break;
             default:
                 Destroy(this.gameObject);
@@ -58,30 +73,77 @@ public class PowerUp : MonoBehaviour {
 
     private void SetPowerUpActions() {
         switch (_powerUpType) {
-            case PowerUpType.PowerUp1:
-                OnCollectPowerUp = StartPowerUp1;
-                OnPowerUpExpires = FinishPowerUp1;
+            case PowerUpType.Magnet:
+                OnCollectPowerUp = StartMagnet;
+                OnPowerUpExpires = FinishMagnet;
                 break;
-            case PowerUpType.PowerUp2:
-                OnCollectPowerUp = StartPowerUp2;
-                OnPowerUpExpires = FinishPowerUp2;
+            case PowerUpType.PowderKeg:
+                OnCollectPowerUp = StartPowderKeg;
+                OnPowerUpExpires = FinishPowderKeg;
+                break;
+            case PowerUpType.Invincibility:
+                OnCollectPowerUp = StartInvincibility;
+                OnPowerUpExpires = FinishInvincibility;
+                break;
+            case PowerUpType.Shield:
+                OnCollectPowerUp = StartShield;
+                OnPowerUpExpires = FinishShield;
+                break;
+            case PowerUpType.CoinMultiplier:
+                OnCollectPowerUp = StartCoinMultipier;
+                OnPowerUpExpires = FinishCoinMultiplier;
                 break;
         }
     }
 
-    private void StartPowerUp1() {
-        Debug.Log("PowerUP1");
+    private void StartMagnet() {
+        PlayerData.Instance.magneticEffect.SetActive(true);
     }
 
-    private void StartPowerUp2() {
-        Debug.Log("PowerUP2");
+    private void FinishMagnet() {
+        PlayerData.Instance.magneticEffect.GetComponent<MagneticEffect>().ClearList();
+        PlayerData.Instance.magneticEffect.SetActive(false);
     }
 
-    private void FinishPowerUp1() {
-        Debug.Log("FinishPowerUP1");
+    private void StartPowderKeg() {
+        PlayerData.Instance.powderKegEffect.SetActive(true);
+        //a way to make the canon upgrade
+        //PlayerData.Instance.isFlying = true;
+        //MapGenerator.Instance._powderKegSpeedIncrease = _powderKegSpeedIncrease;
+        //PlayerMovement.Instance.ChangeSize(true);
     }
 
-    private void FinishPowerUp2() {
-        Debug.Log("FinishPowerUP2");
+    private void FinishPowderKeg() {
+        PlayerData.Instance.powderKegEffect.SetActive(false);
+        //a way to make the canon upgrade
+        //PlayerMovement.Instance.ChangeSize(false);
+        //MapGenerator.Instance._powderKegSpeedIncrease = 0f;
+        //PlayerData.Instance.isFlying = false;
+    }
+
+    private void StartInvincibility(){
+        PlayerData.Instance.isInvincible = true;
+    }
+
+    private void FinishInvincibility(){
+        PlayerData.Instance.isInvincible = false;
+    }
+    private void StartShield()
+    {
+        PlayerData.Instance.shieldDamageReduction = _shieldDamageReduction;
+    }
+
+    private void FinishShield()
+    {
+        PlayerData.Instance.shieldDamageReduction = 0;
+    }
+    private void StartCoinMultipier()
+    {
+        PlayerData.Instance.coinMultiplierPowerUp = _coinMultiplier;
+    }
+
+    private void FinishCoinMultiplier()
+    {
+        PlayerData.Instance.coinMultiplierPowerUp = 1;
     }
 }

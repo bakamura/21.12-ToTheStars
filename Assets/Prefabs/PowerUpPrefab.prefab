@@ -121,10 +121,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efefef270aaea184e9eab7aa4824f290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _powerUpType: 0
+  _powerUpType: 1
   _iconsList:
   - {fileID: 21300000, guid: 5f64c6b4dd712a94696962fb1be783c1, type: 3}
   - {fileID: 21300000, guid: cf9507257c4cf64489058737298b61a4, type: 3}
-  _durationsList:
-  - 10
-  - 20
+  - {fileID: 21300000, guid: 4b3e7855fe56ff34180b1237170f1cf8, type: 3}
+  - {fileID: 21300000, guid: a2cc18070ed2a8441ab6c39d35937595, type: 3}
+  - {fileID: 21300000, guid: 48b6d663957ba554ab25676c63abe621, type: 3}
+  _baseDurationsList:
+  - 3
+  - 0.5
+  - 8
+  - 15
+  - 6
+  _powderKegSpeedIncrease: 3
+  _shieldDamageReduction: 0.5
+  _coinMultiplier: 2

@@ -16,11 +16,11 @@ public class PowerUpHUDIcon : MonoBehaviour {
         ChangeDuration(-_decreaseValue * Time.deltaTime);
     }
 
-    private void ChangeDuration(float value) {
+    public void ChangeDuration(float value) {
         _fillImage.fillAmount += value;
         if (_fillImage.fillAmount <= 0f) {
             OnPowerUpEnd.Invoke();
-            PowerUpHUDManager.Instance.RemovePowerUpInUI(this);
+            PowerUpHUDManager.Instance.RemovePowerUpInUI(ID);
         }
     }
 

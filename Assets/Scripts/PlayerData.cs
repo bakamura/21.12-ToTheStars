@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,15 @@ public class PlayerData : MonoBehaviour {
     public static PlayerData Instance { get; private set; } = null;
 
     public float maxHealth;
-    [System.NonSerialized] public float currentHealth;
+    [NonSerialized] public float currentHealth;
     public float healthLoss;
+    public bool isInvincible;
+    public bool isFlying;
+
+    public GameObject magneticEffect;
+    public GameObject powderKegEffect;
+    [NonSerialized] public float shieldDamageReduction;
+    [NonSerialized] public int coinMultiplierPowerUp = 1;
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -20,7 +28,8 @@ public class PlayerData : MonoBehaviour {
     }
 
     private void Update() {
-        ChangeHealth(-healthLoss * Time.deltaTime);
+        if (!isInvincible)
+            ChangeHealth(-healthLoss * Time.deltaTime);
         if (currentHealth <= 0) Die();
     }
 
@@ -33,8 +42,8 @@ public class PlayerData : MonoBehaviour {
     private void Die() {
         Debug.Log("Player Died"); //
         PlayerMovement.Instance.enabled = false;
-        MapGenerator.instance.isMoving = false;
-        // Get PowerupHUD remove all icons.
+        MapGenerator.Instance.isMoving = false;
+        PowerUpHUDManager.Instance.ClearUI();
         this.enabled = false; //
     }
 }
