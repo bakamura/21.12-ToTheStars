@@ -23,6 +23,8 @@ public class PowerUp : MonoBehaviour {
     [SerializeField] private float _shieldDamageReduction;
     [SerializeField] private int _coinMultiplier;
 
+    public float areaKegEff; //
+
     // Functions similar to delegates, but writes simpler in code.
     private Action OnCollectPowerUp;
     [NonSerialized] public Action OnPowerUpExpires;
@@ -36,7 +38,7 @@ public class PowerUp : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") {
             if (PowerUpHUDManager.Instance.CreatePowerUpInUI(this)) OnCollectPowerUp.Invoke();
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 
@@ -106,7 +108,12 @@ public class PowerUp : MonoBehaviour {
     }
 
     private void StartPowderKeg() {
+        GameObject[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(areaKegEff, 10), Vector2.zero);
+        foreach (GameObject hit in hits) if (hit.tag == "Obstacle") Destroy(hit);
+
         PlayerData.Instance.powderKegEffect.SetActive(true);
+
+
         //a way to make the canon upgrade
         //PlayerData.Instance.isFlying = true;
         //MapGenerator.Instance._powderKegSpeedIncrease = _powderKegSpeedIncrease;
@@ -121,29 +128,25 @@ public class PowerUp : MonoBehaviour {
         //PlayerData.Instance.isFlying = false;
     }
 
-    private void StartInvincibility(){
+    private void StartInvincibility() {
         PlayerData.Instance.isInvincible = true;
     }
 
-    private void FinishInvincibility(){
+    private void FinishInvincibility() {
         PlayerData.Instance.isInvincible = false;
     }
-    private void StartShield()
-    {
+    private void StartShield() {
         PlayerData.Instance.shieldDamageReduction = _shieldDamageReduction;
     }
 
-    private void FinishShield()
-    {
+    private void FinishShield() {
         PlayerData.Instance.shieldDamageReduction = 0;
     }
-    private void StartCoinMultipier()
-    {
+    private void StartCoinMultipier() {
         PlayerData.Instance.coinMultiplierPowerUp = _coinMultiplier;
     }
 
-    private void FinishCoinMultiplier()
-    {
+    private void FinishCoinMultiplier() {
         PlayerData.Instance.coinMultiplierPowerUp = 1;
     }
 }
