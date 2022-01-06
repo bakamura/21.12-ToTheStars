@@ -51,7 +51,7 @@ public class PowerUpHUDManager : MonoBehaviour {
         else Debug.Log("An error occurred whilist fetching ID");
     }
     public void ClearUI() {
-        foreach (RectTransform icons in _iconsPositions) icons.gameObject.GetComponent<PowerUpHUDIcon>().ChangeDuration(-1);
+        for (int i = 0; i < _iconsPositions.Count; i++) _iconsPositions[i].gameObject.GetComponent<PowerUpHUDIcon>().ChangeDuration(-1);
         _iconsInScene.Clear();
         _iconsPositions.Clear();
     }

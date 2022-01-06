@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4018970903738147863}
   - component: {fileID: 8572253006534319531}
   - component: {fileID: 1623245084324258774}
-  - component: {fileID: 731926734132357719}
+  - component: {fileID: 8829377261391104624}
   m_Layer: 0
   m_Name: PowerUpPrefab
   m_TagString: Untagged
@@ -109,7 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &731926734132357719
+--- !u!114 &8829377261391104624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,10 +118,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 393108747826078422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efefef270aaea184e9eab7aa4824f290, type: 3}
+  m_Script: {fileID: 11500000, guid: 466bdab264e6dea4aac896e3bf1fbde2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _powerUpType: 1
+  _powerUpType: 0
   _iconsList:
   - {fileID: 21300000, guid: 5f64c6b4dd712a94696962fb1be783c1, type: 3}
   - {fileID: 21300000, guid: cf9507257c4cf64489058737298b61a4, type: 3}
@@ -129,11 +129,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a2cc18070ed2a8441ab6c39d35937595, type: 3}
   - {fileID: 21300000, guid: 48b6d663957ba554ab25676c63abe621, type: 3}
   _baseDurationsList:
-  - 3
+  - 5
   - 0.5
-  - 8
-  - 15
-  - 6
-  _powderKegSpeedIncrease: 3
-  _shieldDamageReduction: 0.5
-  _coinMultiplier: 2
+  - 4
+  - 10
+  - 7
+  _MagnetPullForce: 3
+  areaKegEff: 10

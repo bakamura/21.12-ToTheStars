@@ -10,13 +10,6 @@ public class PlayerData : MonoBehaviour {
     public float maxHealth;
     [NonSerialized] public float currentHealth;
     public float healthLoss;
-    public bool isInvincible;
-    public bool isFlying;
-
-    public GameObject magneticEffect;
-    public GameObject powderKegEffect;
-    [NonSerialized] public float shieldDamageReduction;
-    [NonSerialized] public int coinMultiplierPowerUp = 1;
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -28,7 +21,7 @@ public class PlayerData : MonoBehaviour {
     }
 
     private void Update() {
-        if (!isInvincible)
+       if(!PowerUp.isPlayerInvincible)
             ChangeHealth(-healthLoss * Time.deltaTime);
         if (currentHealth <= 0) Die();
     }

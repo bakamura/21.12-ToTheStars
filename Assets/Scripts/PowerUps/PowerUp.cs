@@ -18,10 +18,15 @@ public class PowerUp : MonoBehaviour {
     public PowerUpType _powerUpType;
     [SerializeField] private Sprite[] _iconsList = new Sprite[_totalPowerUps]; // @
     [SerializeField] private float[] _baseDurationsList = new float[_totalPowerUps]; // @
-    [SerializeField] private float _powderKegSpeedIncrease;
-    [NonSerialized] public static float maxSizePlayerIncreasePowderKeg = 3;
-    [SerializeField] private float _shieldDamageReduction;
-    [SerializeField] private int _coinMultiplier;
+    //[SerializeField] private float _powderKegSpeedIncrease;
+    //[NonSerialized] public static float maxSizePlayerIncreasePowderKeg = 3;
+    [SerializeField] private float _MagnetPullForce;
+    [NonSerialized] public static float _shieldDamageReduction = 0;
+    [NonSerialized] public static int _coinMultiplier = 1;
+    [NonSerialized] public static bool isPlayerInvincible = false;
+    [NonSerialized] public static bool isPlayerFlying = false;
+    //[NonSerialized] public Coroutine _changeInSizeCoroutine = null;
+    //private Vector2 _playerSizeBeforeChange;
 
     public float areaKegEff; //
 
@@ -38,7 +43,6 @@ public class PowerUp : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") {
             if (PowerUpHUDManager.Instance.CreatePowerUpInUI(this)) OnCollectPowerUp.Invoke();
-            //Destroy(this.gameObject);
         }
     }
 
@@ -99,29 +103,76 @@ public class PowerUp : MonoBehaviour {
     }
 
     private void StartMagnet() {
-        PlayerData.Instance.magneticEffect.SetActive(true);
+        this.transform.SetParent(null);
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        this.GetComponent<Collider2D>().enabled = false;
+        StartCoroutine(this.MagnetEffect());
+    }
+    private IEnumerator MagnetEffect(){
+        while (true)
+        {
+            Collider2D[] hits = Physics2D.OverlapCircleAll(PlayerData.Instance.transform.position, 5);
+            foreach(Collider2D obj in hits) {
+                if(obj.tag == "Coal"){
+                    obj.GetComponent<Rigidbody2D>().velocity = (PlayerData.Instance.transform.position - obj.transform.position).normalized * _MagnetPullForce;
+                }
+            }
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+        }
     }
 
     private void FinishMagnet() {
-        PlayerData.Instance.magneticEffect.GetComponent<MagneticEffect>().ClearList();
-        PlayerData.Instance.magneticEffect.SetActive(false);
+        StopCoroutine(this.MagnetEffect());
+        Destroy(this.gameObject);
     }
 
     private void StartPowderKeg() {
-        GameObject[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(areaKegEff, 10), Vector2.zero);
-        foreach (GameObject hit in hits) if (hit.tag == "Obstacle") Destroy(hit);
-
-        PlayerData.Instance.powderKegEffect.SetActive(true);
-
-
+        Collider2D[] hits = Physics2D.OverlapBoxAll(PlayerData.Instance.transform.position, new Vector2(areaKegEff, 10), 0);
+        foreach (Collider2D obj in hits) if (obj.tag == "Obstacle") Destroy(obj.gameObject);
+        Destroy(this.gameObject);
         //a way to make the canon upgrade
         //PlayerData.Instance.isFlying = true;
         //MapGenerator.Instance._powderKegSpeedIncrease = _powderKegSpeedIncrease;
         //PlayerMovement.Instance.ChangeSize(true);
     }
 
+    //public void ChangeSize(bool increaseSize)
+    //{
+    //    if (_changeInSizeCoroutine == null)
+    //    {
+    //        _changeInSizeCoroutine = StartCoroutine(this.ChangeSizeEffectPowderKeg(increaseSize));
+    //    }
+    //}
+
+    //private IEnumerator ChangeSizeEffectPowderKeg(bool increaseSize)
+    //{
+    //    Vector2 changeInScale = Vector2.zero;
+    //    if (increaseSize)
+    //    {
+    //        _playerSizeBeforeChange = new Vector2(PlayerData.Instance.transform.localScale.x, PlayerData.Instance.transform.localScale.y);
+    //        changeInScale = _playerSizeBeforeChange;
+    //        while (transform.localScale.x < PowerUp.maxSizePlayerIncreasePowderKeg && transform.localScale.y < PowerUp.maxSizePlayerIncreasePowderKeg)
+    //        {
+    //            changeInScale += new Vector2(.05f, .05f);
+    //            transform.localScale = changeInScale;
+    //            yield return new WaitForSeconds(Time.fixedDeltaTime);
+    //        }
+    //        _changeInSizeCoroutine = null;
+    //    }
+    //    else
+    //    {
+    //        changeInScale = PlayerData.Instance.transform.localScale;
+    //        while (transform.localScale.x > _playerSizeBeforeChange.x && transform.localScale.y > _playerSizeBeforeChange.y)
+    //        {
+    //            changeInScale -= new Vector2(.1f, .1f);
+    //            transform.localScale = changeInScale;
+    //            yield return new WaitForSeconds(Time.fixedDeltaTime);
+    //        }
+    //        _changeInSizeCoroutine = null;
+    //    }
+    //}
+
     private void FinishPowderKeg() {
-        PlayerData.Instance.powderKegEffect.SetActive(false);
         //a way to make the canon upgrade
         //PlayerMovement.Instance.ChangeSize(false);
         //MapGenerator.Instance._powderKegSpeedIncrease = 0f;
@@ -129,24 +180,27 @@ public class PowerUp : MonoBehaviour {
     }
 
     private void StartInvincibility() {
-        PlayerData.Instance.isInvincible = true;
+        isPlayerInvincible = true;
+        Destroy(this.gameObject);
     }
 
     private void FinishInvincibility() {
-        PlayerData.Instance.isInvincible = false;
+        isPlayerInvincible = false;
     }
     private void StartShield() {
-        PlayerData.Instance.shieldDamageReduction = _shieldDamageReduction;
+        _shieldDamageReduction = .5f;
+        Destroy(this.gameObject);
     }
 
     private void FinishShield() {
-        PlayerData.Instance.shieldDamageReduction = 0;
+        _shieldDamageReduction = 0;
     }
     private void StartCoinMultipier() {
-        PlayerData.Instance.coinMultiplierPowerUp = _coinMultiplier;
+        _coinMultiplier = 2;
+        Destroy(this.gameObject);
     }
 
     private void FinishCoinMultiplier() {
-        PlayerData.Instance.coinMultiplierPowerUp = 1;
+        _coinMultiplier = 1;
     }
 }

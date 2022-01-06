@@ -10,17 +10,17 @@ public class Obstacle : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") {
-            if (!collision.GetComponent<PlayerData>().isFlying) {
-                if (!collision.GetComponent<PlayerData>().isInvincible){
-                    PlayerData.Instance.ChangeHealth(-(_damage - _damage * PlayerData.Instance.shieldDamageReduction));
+            //if (!PowerUp.isPlayerFlying) {
+                if (!PowerUp.isPlayerInvincible){
+                    PlayerData.Instance.ChangeHealth(-(_damage - _damage * PowerUp._shieldDamageReduction));
                     //finishes the shield power up
-                    if(PlayerData.Instance.shieldDamageReduction > 0) PowerUpHUDManager.Instance._iconsInScene[(int)PowerUp.PowerUpType.Shield].ChangeDuration(-1);
+                    if(PowerUp._shieldDamageReduction > 0) PowerUpHUDManager.Instance._iconsInScene[(int)PowerUp.PowerUpType.Shield].ChangeDuration(-1);
                 }
                 //finishes the invincibility power up
                 else PowerUpHUDManager.Instance._iconsInScene[(int)PowerUp.PowerUpType.Invincibility].ChangeDuration(-1);
                 //SceneControl.TilesManager.Instance.VelocityChange(-_velocityReduction);
                 if (PlayerData.Instance.currentHealth > 0) Destroy(gameObject);
-            }
+            //}
         }
 
     }

@@ -19,9 +19,6 @@ public class PlayerMovement : MonoBehaviour {
     private bool _isMoving;
     private float _targetHeight;
 
-    [System.NonSerialized] public Coroutine _changeInSizeCoroutine = null;
-    private Vector2 _playerSizeBeforeChange;
-
     private void Awake() {
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
@@ -88,35 +85,5 @@ public class PlayerMovement : MonoBehaviour {
         rbPlayer.velocity = Vector2.zero;
         transform.position = new Vector3(transform.position.x, (int)transform.position.y, 0);
         _isMoving = false;
-    }
-    public void ChangeSize(bool increaseSize){
-        if (_changeInSizeCoroutine == null){
-            _changeInSizeCoroutine = StartCoroutine(this.ChangeSizeEffectPowderKeg(increaseSize));
-        }
-    }
-    private IEnumerator ChangeSizeEffectPowderKeg(bool increaseSize)
-    {
-        Vector2 changeInScale = Vector2.zero;
-        if(increaseSize){
-            _playerSizeBeforeChange = new Vector2(transform.localScale.x, transform.localScale.y);
-            changeInScale = _playerSizeBeforeChange;
-            while (transform.localScale.x < PowerUp.maxSizePlayerIncreasePowderKeg && transform.localScale.y < PowerUp.maxSizePlayerIncreasePowderKeg)
-            {
-                changeInScale += new Vector2(.05f, .05f);
-                transform.localScale = changeInScale;
-                yield return new WaitForSeconds(Time.fixedDeltaTime);
-            }
-            _changeInSizeCoroutine = null;
-        }
-        else{
-            changeInScale = transform.localScale;
-            while (transform.localScale.x > _playerSizeBeforeChange.x && transform.localScale.y > _playerSizeBeforeChange.y)
-            {
-                changeInScale -= new Vector2(.1f, .1f);
-                transform.localScale = changeInScale;
-                yield return new WaitForSeconds(Time.fixedDeltaTime);
-            }
-            _changeInSizeCoroutine = null;
-        }
     }
 }
