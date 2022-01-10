@@ -20,7 +20,6 @@ public class PlayerData : MonoBehaviour {
 
     private void Start() {
         animPlayer = GetComponent<Animator>();
-        ChangeHealth(maxHealth * 0.75f);
     }
 
     private void Update() {

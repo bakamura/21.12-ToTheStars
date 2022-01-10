@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
     public void RunStart() {
         // Call when starting a run
         // Create fireball and change it's values corresponding to the player upgrades
+        PlayerData.Instance.maxHealth = 100 + UpgradeManager.Instance.playerUpgrades[0] * 25;
+        PlayerData.Instance.ChangeHealth((float) (PlayerData.Instance.maxHealth * (0.5f + 0.05 * UpgradeManager.Instance.playerUpgrades[1])));
+
     }
 
     public void AtRunEnd(int coinsGain, int runScore) {

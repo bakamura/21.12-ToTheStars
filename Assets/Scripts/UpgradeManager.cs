@@ -7,8 +7,8 @@ public class UpgradeManager : MonoBehaviour {
 
     public static UpgradeManager Instance { get; private set; }
 
-    public int[] playerUpgrades;
-    public int[] powerupUpgrades;
+    public int[] playerUpgrades = new int[5];
+    public int[] powerupUpgrades = new int[5];
 
     private void Awake() {
         if (Instance == null) Instance = this;
