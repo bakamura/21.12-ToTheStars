@@ -7,6 +7,8 @@ public class PlayerData : MonoBehaviour {
 
     public static PlayerData Instance { get; private set; } = null;
 
+    private Animator animPlayer;
+
     public float maxHealth;
     [NonSerialized] public float currentHealth;
     public float healthLoss;
@@ -17,6 +19,7 @@ public class PlayerData : MonoBehaviour {
     }
 
     private void Start() {
+        animPlayer = GetComponent<Animator>();
         ChangeHealth(maxHealth * 0.75f);
     }
 
@@ -28,6 +31,10 @@ public class PlayerData : MonoBehaviour {
 
     public void ChangeHealth(float changeAmount) {
         currentHealth += changeAmount;
+        if (currentHealth < 0) {
+            if (changeAmount <= -500) animPlayer.SetTrigger("DeathInsta");
+            else animPlayer.SetTrigger("Death");
+        }
         if (currentHealth > maxHealth) currentHealth = maxHealth;
         HudManager.Instance.ChangeHealthBarFill(currentHealth / maxHealth);
     }
