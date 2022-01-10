@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7578724755866044062}
   - component: {fileID: 1569301485934287629}
   - component: {fileID: 1569301485934287630}
+  - component: {fileID: 1569301486437692593}
   m_Layer: 0
   m_Name: ---Player
   m_TagString: Player
@@ -74,8 +75,9 @@ SpriteRenderer:
   m_SortingLayerID: 324956037
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 04b7d1c5837809442b3044fdeb14f2f7, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -9210336849383028390, guid: 3606b90f9d944a3449cdb2e8d930002c,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,9 +121,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.1}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
 --- !u!114 &1569301485934287629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,10 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthLoss: 5
-  isInvincible: 0
-  isFlying: 0
-  magneticEffect: {fileID: 0}
-  powderKegEffect: {fileID: 0}
 --- !u!114 &1569301485934287630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,3 +152,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dragScreenPercentage: 0.15
   timeToSwitchLane: 0.2
+--- !u!95 &1569301486437692593
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569301485934287665}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da9c7a14df65d044185a388ec35a293c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

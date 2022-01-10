@@ -463,20 +463,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1569301485934287629, guid: 1b830776ccec2e74188928c6a1813998,
-        type: 3}
-      propertyPath: healthLoss
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1569301485934287631, guid: 1b830776ccec2e74188928c6a1813998,
         type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1569301485934287631, guid: 1b830776ccec2e74188928c6a1813998,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1569301485934287631, guid: 1b830776ccec2e74188928c6a1813998,
         type: 3}
@@ -533,11 +523,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ---Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3208903919387219779, guid: 1b830776ccec2e74188928c6a1813998,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b830776ccec2e74188928c6a1813998, type: 3}
 --- !u!1001 &6359751477412627645
@@ -547,6 +532,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1607169087, guid: 147edfb6a5a532c4a8077d4765acfb4c, type: 3}
+      propertyPath: m_Name
+      value: ScoreText
+      objectReference: {fileID: 0}
     - target: {fileID: 6359751477151153601, guid: 147edfb6a5a532c4a8077d4765acfb4c,
         type: 3}
       propertyPath: m_Pivot.x
