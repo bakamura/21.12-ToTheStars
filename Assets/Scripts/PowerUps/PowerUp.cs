@@ -33,8 +33,8 @@ public class PowerUp : MonoBehaviour {
     // Functions similar to delegates, but writes simpler in code.
     private Action OnCollectPowerUp;
     [NonSerialized] public Action OnPowerUpExpires;
-
     [NonSerialized] public float powerUpDuration;
+
     private void Awake() {
         srPowerUp = GetComponent<SpriteRenderer>();
         PowerUpSetup();
@@ -49,7 +49,7 @@ public class PowerUp : MonoBehaviour {
     public void PowerUpSetup() {
         //RandomizePowerUpType();
         srPowerUp.sprite = _iconsList[(int)_powerUpType];
-        powerUpDuration = _baseDurationsList[(int)_powerUpType];
+        powerUpDuration = _baseDurationsList[(int)_powerUpType] * (1 + 0.5f * UpgradeManager.Instance.powerupUpgrades[(int) _powerUpType]);
         SetPowerUpActions();
     }
 
