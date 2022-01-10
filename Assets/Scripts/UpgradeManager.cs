@@ -3,18 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeManager : MonoBehaviour{
-    public static UpgradeManager Instance { get; private set; }
-    [SerializeField] private Text _txtCurrentCoin;
-    [System.NonSerialized] public int currentCoin;
+public class UpgradeManager : MonoBehaviour {
 
-    private void Awake(){
+    public static UpgradeManager Instance { get; private set; }
+
+    public int[] playerUpgrades;
+    public int[] powerupUpgrades;
+
+    private void Awake() {
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(this.gameObject);
     }
 
-    public void ChangeCurrentCoin(int coinAmount){
-        currentCoin += coinAmount;
-        _txtCurrentCoin.text = currentCoin.ToString("000");
+    public void UnlockPlayerUpgradeBtn(int btnNumber) {
+        if (playerUpgrades[btnNumber] < 5) {
+            if (GameManager.Instance.coins >= UpgradeCostCalcPlayer(btnNumber)) {
+                playerUpgrades[btnNumber]++;
+            }
+            else {
+                // Show insuficient coins msg?
+            }
+        }
+    }
+
+    public void UnlockPowerupUpgradeBtn(int btnNumber) {
+        if (powerupUpgrades[btnNumber] < 5) {
+            if (GameManager.Instance.coins >= UpgradeCostCalcPowerup(btnNumber)) {
+                powerupUpgrades[btnNumber]++;
+            }
+            else {
+                // Show insuficient coins msg?
+            }
+        }
+    }
+
+    private int UpgradeCostCalcPlayer(int level) {
+        switch (level) {
+            case 0: return 100;
+            case 1: return 500;
+            case 2: return 2500;
+            case 3: return 7500;
+            case 4: return 10000;
+            default:
+                Debug.LogWarning("Error Fetching Upgrade Cost");
+                return 9999999;
+        }
+    }
+
+    private int UpgradeCostCalcPowerup(int level) {
+        switch (level) {
+            case 0: return 100;
+            case 1: return 500;
+            case 2: return 2500;
+            case 3: return 7500;
+            case 4: return 10000;
+            default:
+                Debug.LogWarning("Error Fetching Upgrade Cost");
+                return 9999999;
+        }
     }
 }
