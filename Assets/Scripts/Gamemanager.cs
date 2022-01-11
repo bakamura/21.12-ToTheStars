@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; } = null;
 
     public int coins;
+    public int starCoins;
     public int highscore;
 
     private void Awake() {

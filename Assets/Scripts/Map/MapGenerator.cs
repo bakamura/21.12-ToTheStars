@@ -16,8 +16,6 @@ public class MapGenerator : MonoBehaviour {
     private List<GameObject> _currentAreas = new List<GameObject>();
     [SerializeField] private float _distanceToNewArea;
 
-    [System.NonSerialized] public float _powderKegSpeedIncrease = 0;
-
     private void Awake() {
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
@@ -35,7 +33,7 @@ public class MapGenerator : MonoBehaviour {
     private void FixedUpdate() {
         if (isMoving) {
             // Speed multiplier is in sqrt to assure a "caping" nature to the game
-            Vector3 displacement = Vector3.left * (_baseSpeed + _powderKegSpeedIncrease) * Mathf.Sqrt(speedMultiplier) * Time.deltaTime;
+            Vector3 displacement = Vector3.left * _baseSpeed * Mathf.Sqrt(speedMultiplier) * Time.deltaTime;
             foreach (GameObject area in _currentAreas) area.transform.position += displacement;
 
             if (_currentAreas[0].transform.position.x < _maxDistanceToDestroyArea) {
@@ -53,6 +51,7 @@ public class MapGenerator : MonoBehaviour {
 
         speedMultiplier += Time.fixedDeltaTime / 5; // Test
     }
+
     private void GenerateNewArea() {
         GameObject area = _presetArea[Random.Range(0, _presetArea.Length)];
         GameObject instantiatedArea;
@@ -62,6 +61,12 @@ public class MapGenerator : MonoBehaviour {
             Instantiate(area, new Vector3(area.GetComponent<BoxCollider2D>().size.x / 2 + _distanceToNewArea, 0, 0), Quaternion.identity);
         _currentAreas.Add(instantiatedArea);
     }
+
+    public float VelocityCalc(){
+        Vector3 velocity = Vector3.left * _baseSpeed * Mathf.Sqrt(speedMultiplier) * Time.deltaTime;
+        return velocity.x;
+    }
+
     private GameObject GenerateArea(Vector3 spawnPosition) {
         //GameObject instantiatedArea = Instantiate(_presetArea[Random.Range(0, (_presetArea.Length))], spawnPosition, Quaternion.identity);
         GameObject instantiatedArea = Instantiate(_presetArea[Random.Range(0, (_presetArea.Length - 1))], spawnPosition, Quaternion.identity);
