@@ -47,7 +47,7 @@ public class PowerUp : MonoBehaviour {
     }
 
     public void PowerUpSetup() {
-        //RandomizePowerUpType();
+        RandomizePowerUpType();
         srPowerUp.sprite = _iconsList[(int)_powerUpType];
         powerUpDuration = _baseDurationsList[(int)_powerUpType] * (1 + 0.5f * UpgradeManager.Instance.powerupUpgrades[(int) _powerUpType]);
         SetPowerUpActions();

@@ -63,8 +63,7 @@ public class MapGenerator : MonoBehaviour {
     }
 
     public float VelocityCalc(){
-        Vector3 velocity = Vector3.left * _baseSpeed * Mathf.Sqrt(speedMultiplier) * Time.deltaTime;
-        return velocity.x;
+        return _baseSpeed * Mathf.Sqrt(speedMultiplier) * Time.deltaTime;
     }
 
     private GameObject GenerateArea(Vector3 spawnPosition) {

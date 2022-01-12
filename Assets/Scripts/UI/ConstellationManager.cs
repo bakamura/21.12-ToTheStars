@@ -8,7 +8,7 @@ public class ConstellationManager : MonoBehaviour {
     public static ConstellationManager Instance { get; private set; }
 
     private static float _currentStarCoinProgress; // needs to be saved
-    private float _requiredProgressForNewStarCoin = 500; // needs to be saved
+    private float _requiredProgressForNewStarCoin = 1; // needs to be saved
     private int _totalStarCoinsGeneretaed; //needs to be saved
 
     [SerializeField] private Text _starCoinCounterText;
@@ -27,33 +27,34 @@ public class ConstellationManager : MonoBehaviour {
     }
 
     IEnumerator GenerateStarCoin() {
-        while (true/*MapGenerator.Instance.isMoving*/) {
+        while (MapGenerator.Instance.isMoving) {
             _currentStarCoinProgress += MapGenerator.Instance.VelocityCalc();
             CheckForNewStarCoin();
-            Debug.Log(_currentStarCoinProgress);
             yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
     }
+
     private void CheckForNewStarCoin() {
         if (_currentStarCoinProgress >= _requiredProgressForNewStarCoin) {
             _totalStarCoinsGeneretaed++;
             GameManager.starCoins++;
             _starCoinCounterText.text = GameManager.starCoins.ToString("000");
-            _requiredProgressForNewStarCoin = _totalStarCoinsGeneretaed * 500;
+            _requiredProgressForNewStarCoin = (_totalStarCoinsGeneretaed + 1) * 1;
             _currentStarCoinProgress = 0;
         }
     }
     public void ConstellationUiSetUp(ConstellationScript constellationScript) {
         _constelationImage.sprite = constellationScript.constelationImage;
         _constelationName.text = constellationScript.constelationName;
-        constellationScript.ActivatePassive();
+        Open_CloseConstellationHallUI();//closes hall UI
+        Open_CloseConstellationUI();// opens constellation UI
     }
 
-    public void Open_CloseConstelationHallBtn() {
+    public void Open_CloseConstellationHallUI() {
         _constellationHallUI.SetActive(!_constellationHallUI.activeSelf);
     }
 
-    public void Open_CloseConstelationUIBtn() {
+    public void Open_CloseConstellationUI() {
         _constelationUI.SetActive(!_constelationUI.activeSelf);
     }
 }

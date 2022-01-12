@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ConstellationPanelScript : MonoBehaviour
 {
-    public void OpenConstelationUI(){
-        ConstellationManager.Instance.Open_CloseConstelationUIBtn();
+    [SerializeField] private ConstellationScript _constellationScript;
+    public void OpenConstellationUI(){
         this.gameObject.SetActive(false);
+        ConstellationManager.Instance.ConstellationUiSetUp(_constellationScript);
     }
 }

@@ -13,35 +13,39 @@ public class ConstellationScript : MonoBehaviour {
     public string constelationName;
     public PassiveTypes passiveType;
     [SerializeField] private int _starCoinCost;
-
+    
+    [Header("Components")]
     [SerializeField] private Text _constellationNameText;
+    [SerializeField] private Text _starCoiCostText;
     [SerializeField] private Animator _starCostAnimation;
     [System.NonSerialized] public bool isPassiveActive = false;
 
-    private void Awake() {
-        _constellationNameText.text = constelationName;
+    private void Awake(){
+        if(_constellationNameText != null) _constellationNameText.text = constelationName;
+        if(_starCoiCostText != null) _starCoiCostText.text = _starCoinCost.ToString("000");
     }
 
     public void ActivatePassive() {
-        if (!isPassiveActive) {
-            isPassiveActive = true;
-            switch (passiveType) {
-                case PassiveTypes.IncreaseSpeed:
-                    //action
-                    break;
-                case PassiveTypes.IncreaseCoinValue:
-                    //action
-                    break;
-            }
+        isPassiveActive = true;
+        switch (passiveType){
+            case PassiveTypes.IncreaseSpeed:
+                Debug.Log("passive speed active");
+                break;
+            case PassiveTypes.IncreaseCoinValue:
+                Debug.Log("passive coinvalue active");
+                break;
         }
     }
 
-    public void OnPressConstelationBtn() {
-        if (GameManager.starCoins >= _starCoinCost) {
-            GameManager.starCoins -= _starCoinCost;
-            ConstellationManager.Instance.ConstellationUiSetUp(this);
-            _starCostAnimation.SetTrigger("Success");
+    public void OnPressConstellationBtn() {
+        if (!isPassiveActive){
+            if (GameManager.starCoins >= _starCoinCost){
+                GameManager.starCoins -= _starCoinCost;
+                ActivatePassive();
+                _starCostAnimation.SetTrigger("Success");
+            }
+            else _starCostAnimation.SetTrigger("Fail");
         }
-        else _starCostAnimation.SetTrigger("Fail");
+        else ConstellationManager.Instance.ConstellationUiSetUp(this);       
     }
 }
