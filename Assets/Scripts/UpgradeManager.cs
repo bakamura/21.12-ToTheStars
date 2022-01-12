@@ -17,7 +17,7 @@ public class UpgradeManager : MonoBehaviour {
 
     public void UnlockPlayerUpgradeBtn(int btnNumber) {
         if (playerUpgrades[btnNumber] < 5) {
-            if (GameManager.Instance.coins >= UpgradeCostCalcPlayer(btnNumber)) {
+            if (GameManager.coins >= UpgradeCostCalcPlayer(btnNumber)) {
                 playerUpgrades[btnNumber]++;
             }
             else {
@@ -28,7 +28,7 @@ public class UpgradeManager : MonoBehaviour {
 
     public void UnlockPowerupUpgradeBtn(int btnNumber) {
         if (powerupUpgrades[btnNumber] < 5) {
-            if (GameManager.Instance.coins >= UpgradeCostCalcPowerup(btnNumber)) {
+            if (GameManager.coins >= UpgradeCostCalcPowerup(btnNumber)) {
                 powerupUpgrades[btnNumber]++;
             }
             else {

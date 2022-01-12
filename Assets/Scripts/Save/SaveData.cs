@@ -11,8 +11,8 @@ public class SaveData {
     public int[] powerupUpgrades;
 
     public SaveData() {
-        coins = GameManager.Instance.coins;
-        highscore = GameManager.Instance.highscore;
+        coins = GameManager.coins;
+        highscore = GameManager.highscore;
 
         //playerUpgrades = GameManager.Instance.playerUpgrades;
         //powerupUpgrades = GameManager.Instance.powerupUpgrades;

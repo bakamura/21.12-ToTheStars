@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public static class GameManager {
 
-    public static GameManager Instance { get; private set; } = null;
+    public static int coins;
+    public static int highscore;
+    public static int starCoins;
 
-    public int coins;
-    public int starCoins;
-    public int highscore;
-
-    private void Awake() {
-        if (Instance == null) Instance = this;
-        else if (Instance != this) Destroy(gameObject);
-
-        SaveSystem.LoadData();
-    }
-
-    public void RunStart() {
+    public static void RunStart() {
         // Call when starting a run
         // Create fireball and change it's values corresponding to the player upgrades
         PlayerData.Instance.maxHealth = 100 + UpgradeManager.Instance.playerUpgrades[0] * 25;
@@ -25,7 +16,7 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public void AtRunEnd(int coinsGain, int runScore) {
+    public static void AtRunEnd(int coinsGain, int runScore) {
         // Call when ending a run
         coins += coinsGain;
         if (runScore > highscore) {
