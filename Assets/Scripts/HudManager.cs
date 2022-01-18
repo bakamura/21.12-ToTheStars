@@ -22,7 +22,7 @@ public class HudManager : MonoBehaviour {
         _heathBarFill.fillAmount = fillAmount;
     }
 
-    public void ChangeScore(int amount) {
+    public void ChangeScore(float amount) {
         _currentScore += amount;
         _scoreText.text = _currentScore.ToString("F0");
     }

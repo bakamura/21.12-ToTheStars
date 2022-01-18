@@ -10,10 +10,10 @@ public class CoalCoin : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") {
-            //if (!PowerUp.isPlayerFlying){            
-            PlayerData.Instance.ChangeHealth(_lifeIncrease);
-            GameManager.coins += _coinValue + UpgradeManager.Instance.playerUpgrades[2];
+            //if (!PowerUp.isPlayerFlying) {
             //SceneControl.TilesManager.Instance.VelocityChange(_velocityIncrease);
+            PlayerData.Instance.ChangeHealth(_lifeIncrease);
+            GameManager.coins += _coinValue + GameManager.playerUpgrades[2];
             Destroy(gameObject);
             //}
         }
