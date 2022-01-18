@@ -20,12 +20,13 @@ public class PlayerData : MonoBehaviour {
 
     private void Start() {
         animPlayer = GetComponent<Animator>();
-        ChangeHealth((float)(maxHealth * (0.5f + 0.05 * UpgradeManager.Instance.playerUpgrades[1])));
+        ChangeHealth((float)(maxHealth * (0.5f + 0.05 * GameManager.playerUpgrades[1])));
     }
 
     private void Update() {
-       if(!PowerUp.isPlayerInvincible)
-            ChangeHealth(-healthLoss * Time.deltaTime);
+        if (!PowerUp.isPlayerInvincible) ChangeHealth(-healthLoss * Time.deltaTime);
+        HudManager.Instance.ChangeScore(Mathf.Sqrt(MapGenerator.Instance.speedMultiplier));
+
         if (currentHealth <= 0) Die();
     }
 
