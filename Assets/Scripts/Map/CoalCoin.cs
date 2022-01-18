@@ -12,8 +12,13 @@ public class CoalCoin : MonoBehaviour {
         if (collision.tag == "Player") {
             //if (!PowerUp.isPlayerFlying) {
             //SceneControl.TilesManager.Instance.VelocityChange(_velocityIncrease);
+
             PlayerData.Instance.ChangeHealth(_lifeIncrease);
-            GameManager.coins += _coinValue + GameManager.playerUpgrades[2];
+
+            int coinAmount = _coinValue + GameManager.playerUpgrades[2];
+            GameManager.coins += coinAmount;
+            HudManager.Instance.ChangeRunCoins(coinAmount);
+
             Destroy(gameObject);
             //}
         }

@@ -12,6 +12,13 @@ public class HudManager : MonoBehaviour {
 
     private float _currentScore = 0;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    private int _currentRunCoins = 0;
+    [SerializeField] private TextMeshProUGUI _coinsText;
+
+    [SerializeField] private Button _pauseBtn;
+    [SerializeField] private Sprite[] _pauseBtnSprites = new Sprite[2]; // 0 is pause, 1 is resume
+    [SerializeField] private TextMeshProUGUI _pauseText;
+    [SerializeField] private CanvasGroup _settingsMenu;
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -25,5 +32,67 @@ public class HudManager : MonoBehaviour {
     public void ChangeScore(float amount) {
         _currentScore += amount;
         _scoreText.text = _currentScore.ToString("F0");
+    }
+
+    public void ChangeRunCoins(int amount) {
+        _currentRunCoins += amount;
+        _coinsText.text = _currentRunCoins.ToString("F0");
+    }
+
+    public void PauseMenuBtn() {
+        if (!_pauseText.GetComponent<CanvasGroup>().interactable) {
+            Time.timeScale = 0;
+
+            _pauseBtn.image.sprite = _pauseBtnSprites[1];
+            ActivateHudElement(_pauseText.GetComponent<CanvasGroup>(), true);
+        }
+        else {
+            StartCoroutine(ResumeGame());
+
+            _pauseBtn.image.sprite = _pauseBtnSprites[0];
+        }
+    }
+
+    private IEnumerator ResumeGame() {
+        _pauseText.text = "3";
+
+        yield return new WaitForSeconds(0.33f);
+
+        _pauseText.text = "2";
+
+        yield return new WaitForSeconds(0.33f);
+
+        _pauseText.text = "1";
+
+        yield return new WaitForSeconds(0.33f);
+
+        ActivateHudElement(_pauseText.GetComponent<CanvasGroup>(), false);
+        _pauseText.text = "-Paused-";
+
+        yield return new WaitForSeconds(0.01f);
+
+        Time.timeScale = 1;
+    }
+
+    public void ReturnToMainMenu() {
+        // Return to the main menu
+    }
+
+    public void SettingsBtn(bool active) {
+        ActivateHudElement(_settingsMenu, active);
+    }
+
+    public void MusicSlider(float volume) {
+        // Change vol based on "volume" input
+    }
+
+    public void FxSlider(float volume) {
+        // Change vol based on "volume" input
+    }
+
+    public static void ActivateHudElement(CanvasGroup canvas, bool active) {
+        canvas.alpha = active ? 1 : 0;
+        canvas.interactable = active;
+        canvas.blocksRaycasts = active;
     }
 }

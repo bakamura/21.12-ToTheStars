@@ -32,8 +32,7 @@ public class MapGenerator : MonoBehaviour {
 
     private void FixedUpdate() {
         if (isMoving) {
-            // Speed multiplier is in sqrt to assure a "caping" nature to the game
-            Vector3 displacement = Vector3.left * _baseSpeed * Mathf.Sqrt(speedMultiplier) * Time.deltaTime;
+            Vector3 displacement = Vector3.left * VelocityCalc();
             foreach (GameObject area in _currentAreas) area.transform.position += displacement;
 
             if (_currentAreas[0].transform.position.x < _maxDistanceToDestroyArea) {
@@ -62,7 +61,8 @@ public class MapGenerator : MonoBehaviour {
         _currentAreas.Add(instantiatedArea);
     }
 
-    public float VelocityCalc(){
+    public float VelocityCalc() {
+        // Speed multiplier is in sqrt to assure a "caping" nature to the game
         return _baseSpeed * Mathf.Sqrt(speedMultiplier) * Time.deltaTime;
     }
 

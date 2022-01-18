@@ -39,8 +39,8 @@ public class ConstellationScript : MonoBehaviour {
 
     public void OnPressConstellationBtn() {
         if (!isPassiveActive){
-            if (GameManager.starCoins >= _starCoinCost){
-                GameManager.starCoins -= _starCoinCost;
+            if (GameManager.starCurrency >= _starCoinCost){
+                GameManager.starCurrency -= _starCoinCost;
                 ActivatePassive();
                 _starCostAnimation.SetTrigger("Success");
             }
