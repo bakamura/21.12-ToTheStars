@@ -25,6 +25,14 @@ public class HudManager : MonoBehaviour {
         else if (Instance != this) Destroy(gameObject);
     }
 
+    private void Start() {
+        ChangeRunCoins(0);
+        ChangeScore(0);
+
+        ActivateHudElement(_pauseText.GetComponent<CanvasGroup>(), false);
+        ActivateHudElement(_settingsMenu.GetComponent<CanvasGroup>(), false);
+    }
+
     public void ChangeHealthBarFill(float fillAmount) {
         _heathBarFill.fillAmount = fillAmount;
     }
@@ -56,20 +64,20 @@ public class HudManager : MonoBehaviour {
     private IEnumerator ResumeGame() {
         _pauseText.text = "3";
 
-        yield return new WaitForSeconds(0.33f);
+        yield return new WaitForSecondsRealtime(0.33f);
 
         _pauseText.text = "2";
-
-        yield return new WaitForSeconds(0.33f);
+        
+        yield return new WaitForSecondsRealtime(0.33f);
 
         _pauseText.text = "1";
 
-        yield return new WaitForSeconds(0.33f);
+        yield return new WaitForSecondsRealtime(0.33f);
 
         ActivateHudElement(_pauseText.GetComponent<CanvasGroup>(), false);
         _pauseText.text = "-Paused-";
 
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSecondsRealtime(0.01f);
 
         Time.timeScale = 1;
     }

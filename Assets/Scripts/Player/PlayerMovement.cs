@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _dragScreenPercentage;
     private float _dragDistance;
 
-    [SerializeField] private float timeToSwitchLane;
+    [SerializeField] private float _baseTimeToSwitchLane;
     private bool _isMoving;
     private float _targetHeight;
 
@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update() {
         DetectMovement();
-
     }
 
     private void DetectMovement() {
@@ -53,14 +52,14 @@ public class PlayerMovement : MonoBehaviour {
                     Vector3 dragDirection = _touchCurrentPos - _touchInitialPos;
                     float dragAngle = Mathf.Atan2(dragDirection.y, dragDirection.x) * Mathf.Rad2Deg;
                     if (dragAngle > 45 && dragAngle < 135) {
-                        Debug.Log("Swiped Up"); //
-                        if (!_isMoving && transform.position.y < 2) StartCoroutine(MoveTowardsHeight(true));
+                        // Debug.Log("Swiped Up");
+                        if (!_isMoving && transform.position.y < 2) StartCoroutine(MoveTowardsHeight(2));
                         _isTrackingTouch = false;
                         return;
                     }
                     else if (dragAngle < -45 && dragAngle > -135) {
-                        Debug.Log("Swiped Down"); //
-                        if (!_isMoving && transform.position.y > -2) StartCoroutine(MoveTowardsHeight(false));
+                        // Debug.Log("Swiped Down");
+                        if (!_isMoving && transform.position.y > -2) StartCoroutine(MoveTowardsHeight(-2));
                         _isTrackingTouch = false;
                     }
                 }
@@ -68,11 +67,13 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private IEnumerator MoveTowardsHeight(bool isUpwards) {
+    private IEnumerator MoveTowardsHeight(float direction) {
         _isMoving = true;
 
         // Direction should be called with the distance between each lane's pivot
-        rbPlayer.velocity = isUpwards ? (2 * Vector2.up / timeToSwitchLane) : (2 * Vector2.down / timeToSwitchLane);
+        Debug.Log(new Vector2(direction /* * MapGenerator.Instance.VelocityCalc() */ / _baseTimeToSwitchLane, 0));
+        rbPlayer.velocity = new Vector2(direction /* * MapGenerator.Instance.VelocityCalc() */ / _baseTimeToSwitchLane, 0);
+        Debug.Log(rbPlayer.velocity);
 
         //for (int i = 0; i < 60; i++) { // WaitForSeconds doesn't properly work when float is too small
         //    transform.position += new Vector3(0, direction / 60, 0);
@@ -80,7 +81,7 @@ public class PlayerMovement : MonoBehaviour {
         //    yield return new WaitForSeconds(timeToSwitchLane);
         //} 
 
-        yield return new WaitForSeconds(timeToSwitchLane);
+        yield return new WaitForSeconds(_baseTimeToSwitchLane /* / MapGenerator.Instance.VelocityCalc() */);
 
         rbPlayer.velocity = Vector2.zero;
         transform.position = new Vector3(transform.position.x, (int)transform.position.y, 0);

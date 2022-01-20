@@ -1216,8 +1216,8 @@ MonoBehaviour:
   _pauseBtnSprites:
   - {fileID: 21300000, guid: cf9507257c4cf64489058737298b61a4, type: 3}
   - {fileID: 21300000, guid: 5f64c6b4dd712a94696962fb1be783c1, type: 3}
-  _pauseMenu: {fileID: 0}
-  _settingsMenu: {fileID: 0}
+  _pauseText: {fileID: 1734586394148717841}
+  _settingsMenu: {fileID: 4442807983473017024}
 --- !u!1 &6403951666663181846
 GameObject:
   m_ObjectHideFlags: 0

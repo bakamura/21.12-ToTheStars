@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1569301485934287631}
   - component: {fileID: 1569301485934287664}
+  - component: {fileID: 1569301486437692593}
   - component: {fileID: 7533572860066136657}
   - component: {fileID: 7578724755866044062}
+  - component: {fileID: 6121018144398164208}
   - component: {fileID: 1569301485934287629}
   - component: {fileID: 1569301485934287630}
-  - component: {fileID: 1569301486437692593}
   m_Layer: 0
   m_Name: ---Player
   m_TagString: Player
@@ -87,6 +88,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1569301486437692593
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569301485934287665}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da9c7a14df65d044185a388ec35a293c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &7533572860066136657
 Rigidbody2D:
   serializedVersion: 4
@@ -124,6 +144,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.1}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &6121018144398164208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569301485934287665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7846ac78c08920e4ab43a4b86d08b567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _atStartOnly: 0
+  _offset: 1
 --- !u!114 &1569301485934287629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  healthLoss: -20
+  healthLoss: 3
 --- !u!114 &1569301485934287630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,23 +185,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragScreenPercentage: 0.15
-  timeToSwitchLane: 0.2
---- !u!95 &1569301486437692593
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569301485934287665}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da9c7a14df65d044185a388ec35a293c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  _baseTimeToSwitchLane: 0.5

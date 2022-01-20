@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8574292479987800704}
   - component: {fileID: -8353833038071354607}
   - component: {fileID: 3947251438425338249}
+  - component: {fileID: 1245383948474841336}
   - component: {fileID: 7029061631866046952}
   m_Layer: 0
   m_Name: CoalPrefab
@@ -121,6 +122,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1245383948474841336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560678948892101010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7846ac78c08920e4ab43a4b86d08b567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _atStartOnly: 1
+  _offset: 0
 --- !u!114 &7029061631866046952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,4 +149,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeIncrease: 5
-  _coinValue: 3
+  _coinValue: 2

@@ -45,10 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _presetArea:
   - {fileID: 7668624778746343472, guid: 331a1491de21681429518d3be1a67e25, type: 3}
-  - {fileID: 6635864840667402462, guid: 5a3a5ae2b1e46ce43b1dd850cdcff2a0, type: 3}
-  - {fileID: 1421786973267049340, guid: 65048a6cd499fd6409041a2ef206c566, type: 3}
-  _spawnLocation: {x: 36, y: 0, z: 0}
-  _maxDistanceToDestroyArea: -20
-  _baseSpeed: 1
+  _screenLeftmostPoint: -9
+  _baseSpeed: 1.5
   speedMultiplier: 3
-  _distanceToNewArea: 18
+  _distanceToFirstArea: 9
