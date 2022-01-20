@@ -500,11 +500,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2083798382519374704, guid: 147edfb6a5a532c4a8077d4765acfb4c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 41569d051facf104ea98e50571f5ee8f,
+        type: 3}
     - target: {fileID: 4442807983473017024, guid: 147edfb6a5a532c4a8077d4765acfb4c,
         type: 3}
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6359751477151153600, guid: 147edfb6a5a532c4a8077d4765acfb4c,
+        type: 3}
+      propertyPath: _pauseBtnSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 41569d051facf104ea98e50571f5ee8f,
+        type: 3}
+    - target: {fileID: 6359751477151153600, guid: 147edfb6a5a532c4a8077d4765acfb4c,
+        type: 3}
+      propertyPath: _pauseBtnSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: a7ce32ae27c7cb04dae03af97b1eae4e,
+        type: 3}
     - target: {fileID: 6359751477151153601, guid: 147edfb6a5a532c4a8077d4765acfb4c,
         type: 3}
       propertyPath: m_Pivot.x
