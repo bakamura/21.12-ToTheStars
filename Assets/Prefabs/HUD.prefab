@@ -272,7 +272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 299ecb3d94b3f564589433ee5678ddfc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 41569d051facf104ea98e50571f5ee8f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -419,9 +419,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637116240569214440}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &4929629669806997559
 GameObject:
@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 6177571030280913573}
   - component: {fileID: 9219854379900947866}
   - component: {fileID: 2757362971999655684}
+  - component: {fileID: 8320224702780778691}
   m_Layer: 5
   m_Name: HomeBtn
   m_TagString: Untagged
@@ -685,6 +686,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!225 &8320224702780778691
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5014373781081420686}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5308951208924628953
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +710,7 @@ GameObject:
   - component: {fileID: 1704282417113507190}
   - component: {fileID: 6428433208122218424}
   - component: {fileID: 3020311239691503695}
+  - component: {fileID: 6303484608980745069}
   m_Layer: 5
   m_Name: SettingsBtn
   m_TagString: Untagged
@@ -814,6 +828,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!225 &6303484608980745069
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308951208924628953}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5921625428160468138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,9 +1240,11 @@ MonoBehaviour:
   _coinsText: {fileID: 462168596769063966}
   _pauseBtn: {fileID: 1393518985067687446}
   _pauseBtnSprites:
-  - {fileID: 21300000, guid: cf9507257c4cf64489058737298b61a4, type: 3}
-  - {fileID: 21300000, guid: 5f64c6b4dd712a94696962fb1be783c1, type: 3}
+  - {fileID: 21300000, guid: 41569d051facf104ea98e50571f5ee8f, type: 3}
+  - {fileID: 21300000, guid: a7ce32ae27c7cb04dae03af97b1eae4e, type: 3}
   _pauseText: {fileID: 1734586394148717841}
+  _settingsBtn: {fileID: 6303484608980745069}
+  _homeBtn: {fileID: 8320224702780778691}
   _settingsMenu: {fileID: 4442807983473017024}
 --- !u!1 &6403951666663181846
 GameObject:
@@ -1360,9 +1388,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6403951666663181846}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &8536389407795881322
 GameObject:

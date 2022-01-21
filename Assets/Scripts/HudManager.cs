@@ -18,6 +18,8 @@ public class HudManager : MonoBehaviour {
     [SerializeField] private Button _pauseBtn;
     [SerializeField] private Sprite[] _pauseBtnSprites = new Sprite[2]; // 0 is pause, 1 is resume
     [SerializeField] private TextMeshProUGUI _pauseText;
+    [SerializeField] private CanvasGroup _settingsBtn;
+    [SerializeField] private CanvasGroup _homeBtn;
     [SerializeField] private CanvasGroup _settingsMenu;
 
     private void Awake() {
@@ -53,6 +55,8 @@ public class HudManager : MonoBehaviour {
 
             _pauseBtn.image.sprite = _pauseBtnSprites[1];
             ActivateHudElement(_pauseText.GetComponent<CanvasGroup>(), true);
+            ActivateHudElement(_settingsBtn.GetComponent<CanvasGroup>(), true);
+            ActivateHudElement(_homeBtn.GetComponent<CanvasGroup>(), true);
         }
         else {
             StartCoroutine(ResumeGame());
@@ -62,6 +66,8 @@ public class HudManager : MonoBehaviour {
     }
 
     private IEnumerator ResumeGame() {
+        ActivateHudElement(_settingsBtn.GetComponent<CanvasGroup>(), false);
+        ActivateHudElement(_homeBtn.GetComponent<CanvasGroup>(), false);
         _pauseText.text = "3";
 
         yield return new WaitForSecondsRealtime(0.33f);
