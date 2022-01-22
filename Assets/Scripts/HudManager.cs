@@ -109,4 +109,6 @@ public class HudManager : MonoBehaviour {
         canvas.interactable = active;
         canvas.blocksRaycasts = active;
     }
+
+
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,10 +7,13 @@ using UnityEngine.UI;
 [System.Serializable] //
 public class Constellation {
     public bool[] stars;
+    //public Action ConstelationBonus;
 }
 
 public class ConstellationManager : MonoBehaviour {
 
+
+    // Vini Old
     public static ConstellationManager Instance { get; private set; }
 
     private static float _currentStarCoinProgress; // needs to be saved
@@ -63,7 +67,7 @@ public class ConstellationManager : MonoBehaviour {
         _constelationUI.SetActive(!_constelationUI.activeSelf);
     }
 
-    // Reformulation
+    // Reformulation by naka
 
     public Constellation nameoneConstellation;
     public Constellation nametwoConstellation;
@@ -104,6 +108,10 @@ public class ConstellationManager : MonoBehaviour {
                 GameManager.coins += StarLitReward(alreadyLitStars);
 
                 constelation.stars[starN] = true;
+
+                //revisit
+                //alreadyLitStars++;
+                //if(alreadyLitStars == constelation.stars.Length) 
             }
             else {
                 // show insuficient stars message
