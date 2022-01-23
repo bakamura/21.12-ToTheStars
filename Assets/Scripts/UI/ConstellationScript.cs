@@ -46,6 +46,6 @@ public class ConstellationScript : MonoBehaviour {
             }
             else _starCostAnimation.SetTrigger("Fail");
         }
-        else ConstellationManager.Instance.ConstellationUiSetUp(this);       
+        //else ConstellationManager.Instance.ConstellationUiSetUp(this);       
     }
 }

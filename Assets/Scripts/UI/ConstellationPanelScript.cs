@@ -7,6 +7,6 @@ public class ConstellationPanelScript : MonoBehaviour
     [SerializeField] private ConstellationScript _constellationScript;
     public void OpenConstellationUI(){
         this.gameObject.SetActive(false);
-        ConstellationManager.Instance.ConstellationUiSetUp(_constellationScript);
+        //ConstellationManager.Instance.ConstellationUiSetUp(_constellationScript);
     }
 }
