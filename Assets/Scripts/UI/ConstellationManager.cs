@@ -26,7 +26,7 @@ public class ConstellationManager : MonoBehaviour {
     //[SerializeField] private Image _constelationImage;
     //
     private void Awake() {
-        if (Instance == null){
+        if (Instance == null) {
             Instance = this;
             _starCurrencyText.text = GameManager.starCurrency.ToString();
         }
@@ -69,7 +69,7 @@ public class ConstellationManager : MonoBehaviour {
     //    _constelationUI.SetActive(!_constelationUI.activeSelf);
     //}
     //
-    
+
     //
 
     // Reformulation by naka
@@ -87,7 +87,7 @@ public class ConstellationManager : MonoBehaviour {
 
     [SerializeField] private Text _starCurrencyText;
 
-    public enum constelationPassives{
+    public enum constelationPassives {
         Speed,
         CoinValue
     };
@@ -100,7 +100,7 @@ public class ConstellationManager : MonoBehaviour {
         CheckStarLit(GetConstellation(currentConstellation), starN);
     }
 
-    public void UpdateCurrentStarButton(GameObject starBtn){
+    public void UpdateCurrentStarButton(GameObject starBtn) {
         _starBtn = starBtn;
     }
 
@@ -163,20 +163,18 @@ public class ConstellationManager : MonoBehaviour {
         }
     }
 
-    private void ActivateConstelationPassive(constelationPassives passive)
-    {
-        switch (passive)
-        {
+    private void ActivateConstelationPassive(constelationPassives passive) {
+        switch (passive) {
             case constelationPassives.Speed: Debug.Log("speed"); break;
             case constelationPassives.CoinValue: Debug.Log("CoinValue"); break;
         }
     }
 
-    IEnumerator UpdateStarCurrencyText(float add_subtract){
+    IEnumerator UpdateStarCurrencyText(float add_subtract) {
         int _currentValue = GameManager.starCurrency;
         GameManager.starCurrency += (int)(add_subtract);
         _starCurrencyText.GetComponent<Animator>().SetBool("SUCCESS", true);
-        while (_currentValue != GameManager.starCurrency){
+        while (_currentValue != GameManager.starCurrency) {
             _currentValue += (int)(add_subtract);
             _starCurrencyText.text = _currentValue.ToString();
             yield return new WaitForSeconds(Time.fixedDeltaTime);
