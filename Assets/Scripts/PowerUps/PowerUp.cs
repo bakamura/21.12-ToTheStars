@@ -7,15 +7,17 @@ public class PowerUp : MonoBehaviour {
 
     [NonSerialized] public SpriteRenderer srPowerUp;
 
-    private const int _totalPowerUps = 5; // @
+    private const int _totalPowerUps = 6; // @
     public enum PowerUpType {
         Magnet,
         PowderKeg,
         Invincibility,
         Shield,
-        CoinMultiplier
+        CoinMultiplier,
+        StarCoin
     };
     public PowerUpType _powerUpType;
+    [SerializeField] private float[] _powerUpChance = new float[_totalPowerUps];
     [SerializeField] private Sprite[] _iconsList = new Sprite[_totalPowerUps]; // @
     [SerializeField] private float[] _baseDurationsList = new float[_totalPowerUps]; // @
     //[SerializeField] private float _powderKegSpeedIncrease;
@@ -53,27 +55,30 @@ public class PowerUp : MonoBehaviour {
         SetPowerUpActions();
     }
 
-    private void RandomizePowerUpType() {
-        int randomNumber = UnityEngine.Random.Range(0, _totalPowerUps * 2);
-        switch (randomNumber) {
+    private PowerUpType SetPowerUpType(int i){
+        switch (i) {
             case 0:
-                _powerUpType = PowerUpType.Magnet;
-                break;
+                return _powerUpType = PowerUpType.Magnet;
             case 1:
-                _powerUpType = PowerUpType.PowderKeg;
-                break;
+                return _powerUpType = PowerUpType.PowderKeg;
             case 2:
-                _powerUpType = PowerUpType.Invincibility;
-                break;
+                return _powerUpType = PowerUpType.Invincibility;
             case 3:
-                _powerUpType = PowerUpType.Shield;
-                break;
+                return _powerUpType = PowerUpType.Shield;
             case 4:
-                _powerUpType = PowerUpType.CoinMultiplier;
-                break;
+                return _powerUpType = PowerUpType.CoinMultiplier;
+            case 5:
+                return _powerUpType = PowerUpType.StarCoin;
             default:
-                Destroy(this.gameObject);
-                break;
+                Debug.LogWarning("Faliuer at randomizing power up");
+                return _powerUpType = PowerUpType.Magnet;
+        }
+    }
+
+    private void RandomizePowerUpType() {
+        for (int _currentPowerUpChance = 0; _currentPowerUpChance < _powerUpChance.Length; _currentPowerUpChance++){
+            float randomNumber = UnityEngine.Random.Range(0f, 100f * 2f);
+            if (randomNumber <= _powerUpChance[_currentPowerUpChance]) SetPowerUpType(_currentPowerUpChance);
         }
     }
 
@@ -98,6 +103,9 @@ public class PowerUp : MonoBehaviour {
             case PowerUpType.CoinMultiplier:
                 OnCollectPowerUp = StartCoinMultipier;
                 OnPowerUpExpires = FinishCoinMultiplier;
+                break;
+            case PowerUpType.StarCoin:
+                OnCollectPowerUp = StarCoin;
                 break;
         }
     }
@@ -202,5 +210,9 @@ public class PowerUp : MonoBehaviour {
 
     private void FinishCoinMultiplier() {
         _coinMultiplier = 1;
+    }
+
+    private void StarCoin(){
+        GameManager.starCurrency++;
     }
 }

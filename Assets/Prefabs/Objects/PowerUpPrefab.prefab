@@ -122,12 +122,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _powerUpType: 0
+  _powerUpChance:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
   _iconsList:
   - {fileID: 21300000, guid: c60c432dc77a33846ab3c1ee14129562, type: 3}
   - {fileID: 21300000, guid: a7ce32ae27c7cb04dae03af97b1eae4e, type: 3}
   - {fileID: 21300000, guid: e9a0a063ea84cd64b846078b9a0e5937, type: 3}
   - {fileID: 21300000, guid: 41569d051facf104ea98e50571f5ee8f, type: 3}
   - {fileID: 21300000, guid: 47d1dab3790275b4ba261118d11b5f5d, type: 3}
+  - {fileID: 21300000, guid: d497e0be6c0a3d24480aa76cacd3b37b, type: 3}
   _baseDurationsList:
   - 5
   - 0.5

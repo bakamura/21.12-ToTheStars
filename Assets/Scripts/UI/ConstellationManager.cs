@@ -121,13 +121,13 @@ public class ConstellationManager : MonoBehaviour {
         if (!constelation.stars[starN]) {
             if (GameManager.starCurrency > 0) {
                 //GameManager.starCurrency -= 1;
-                StartCoroutine(this.UpdateStarCurrencyText(-300f));
+                StartCoroutine(this.UpdateStarCurrencyText(-1f));
 
                 int alreadyLitStars = 0;
                 foreach (bool lit in constelation.stars) alreadyLitStars += lit ? 1 : 0;
                 GameManager.coins += StarLitReward(alreadyLitStars);
 
-                _starBtn.GetComponent<Animator>().SetTrigger("ACTIVATE");
+                _starBtn.GetComponentInChildren<Animator>().SetTrigger("ACTIVATE");
                 _starsActives.Add(_starBtn);
 
                 if (alreadyLitStars == constelation.stars.Length - 1) ActivateConstelationPassive(constelation.constelationPassive);
@@ -174,10 +174,10 @@ public class ConstellationManager : MonoBehaviour {
 
     IEnumerator UpdateStarCurrencyText(float add_subtract){
         int _currentValue = GameManager.starCurrency;
-        GameManager.starCurrency += Mathf.RoundToInt(add_subtract);
+        GameManager.starCurrency += (int)(add_subtract);
         _starCurrencyText.GetComponent<Animator>().SetBool("SUCCESS", true);
         while (_currentValue != GameManager.starCurrency){
-            _currentValue += Mathf.RoundToInt(add_subtract * .02f);
+            _currentValue += (int)(add_subtract);
             _starCurrencyText.text = _currentValue.ToString();
             yield return new WaitForSeconds(Time.fixedDeltaTime);
         }

@@ -26,7 +26,7 @@ public class PowerUpHUDManager : MonoBehaviour {
     }
 
     public bool CreatePowerUpInUI(PowerUp _powerUpActivated) {
-        if (!_iconsInScene.ContainsKey((int)_powerUpActivated._powerUpType)) {
+        if (!_iconsInScene.ContainsKey((int)_powerUpActivated._powerUpType) && _powerUpActivated._powerUpType != PowerUp.PowerUpType.StarCoin) {
             GameObject icon = Instantiate(_powerUpIconPrefab, transform.position, Quaternion.identity, transform);
             icon.GetComponent<PowerUpHUDIcon>().PowerUpIconSetup(_powerUpActivated.srPowerUp.sprite, _powerUpActivated.powerUpDuration, (int)_powerUpActivated._powerUpType, _powerUpActivated.OnPowerUpExpires);
 
