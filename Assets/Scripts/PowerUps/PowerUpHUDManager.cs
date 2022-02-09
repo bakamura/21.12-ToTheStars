@@ -51,10 +51,11 @@ public class PowerUpHUDManager : MonoBehaviour {
         else Debug.Log("An error occurred whilist fetching ID");
     }
     public void ClearUI() {
-        for (int i = 0; i < _iconsPositions.Count; i++) _iconsPositions[i].gameObject.GetComponent<PowerUpHUDIcon>().ChangeDuration(-1);
+        for (int i = 0; i < _iconsPositions.Count; i++) _iconsPositions[i].gameObject.GetComponent<PowerUpHUDIcon>().ChangeDuration(-1);// end all power up effects
         _iconsInScene.Clear();
         _iconsPositions.Clear();
     }
+
     private void UpdateIconsPositions() {
         // Probably won't see use, but it's useful if it's ever needed.
         for (int currentIcon = 0; currentIcon < _iconsInScene.Count; currentIcon++) {

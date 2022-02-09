@@ -7,6 +7,7 @@ public static class GameManager {
     public static int coins;
     public static int highscore;
     public static int starCurrency = 100;
+    public static int dailyDoubleCoins;
 
     public static int[] playerUpgrades = new int[5];
     public static int[] powerupUpgrades = new int[5];
@@ -19,9 +20,19 @@ public static class GameManager {
 
     }
 
-    public static void AtRunEnd(int coinsGain, int runScore) {
+    public static void RestartRun(){
+        MapGenerator.Instance.ClearAllAreas();
+        HudManager.Instance.RestartHUDElements();
+        MapGenerator.Instance.GenerateStartArea();
+        PlayerData.Instance.RestartPlayer();
+        MapGenerator.Instance.isMoving = true;
+        LaunchPlayerPassive.Instance.Activate();
+    }
+
+    public static void AtRunEnd(int coinsGain, int runScore, int starCoinsGain) {
         // Call when ending a run
         coins += coinsGain;
+        starCurrency += starCoinsGain;
         if (runScore > highscore) {
             highscore = runScore;
             // Do something to show it's a new highscore

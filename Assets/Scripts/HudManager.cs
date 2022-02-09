@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HudManager : MonoBehaviour {
 
@@ -10,10 +11,14 @@ public class HudManager : MonoBehaviour {
 
     [SerializeField] private Image _heathBarFill;
 
-    private float _currentScore = 0;
+    public static float currentScore = 0;
     [SerializeField] private TextMeshProUGUI _scoreText;
     private int _currentRunCoins = 0;
     [SerializeField] private TextMeshProUGUI _coinsText;
+    [System.NonSerialized] public int _currentStarCoins;
+
+    [SerializeField] private TextMeshProUGUI _resultScreenScoreText;
+    [SerializeField] private TextMeshProUGUI _resultScreenCoinText;
 
     [SerializeField] private Button _pauseBtn;
     [SerializeField] private Sprite[] _pauseBtnSprites = new Sprite[2]; // 0 is pause, 1 is resume
@@ -21,6 +26,7 @@ public class HudManager : MonoBehaviour {
     [SerializeField] private CanvasGroup _settingsBtn;
     [SerializeField] private CanvasGroup _homeBtn;
     [SerializeField] private CanvasGroup _settingsMenu;
+    [SerializeField] private CanvasGroup _resultScreen; /**/
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -40,8 +46,8 @@ public class HudManager : MonoBehaviour {
     }
 
     public void ChangeScore(float amount) {
-        _currentScore += amount;
-        _scoreText.text = _currentScore.ToString("F0");
+        currentScore += amount;
+        _scoreText.text = currentScore.ToString("F0");
     }
 
     public void ChangeRunCoins(int amount) {
@@ -89,6 +95,7 @@ public class HudManager : MonoBehaviour {
     }
 
     public void ReturnToMainMenu() {
+        SceneManager.LoadScene("MainMenu");
         // Return to the main menu
     }
 
@@ -110,5 +117,22 @@ public class HudManager : MonoBehaviour {
         canvas.blocksRaycasts = active;
     }
 
+    public void ResultScreen(){
+        //GameManager.AtRunEnd(_currentRunCoins, (int)_currentScore, _currentStarCoins);
+        if (currentScore > GameManager.highscore) _resultScreenScoreText.GetComponent<Animator>().SetTrigger("HIGHSCORE");
+        _resultScreenScoreText.text = "Score: " + ((int)currentScore).ToString();
+        _resultScreenCoinText.text = "Coins: " + _currentRunCoins.ToString();
+        ActivateHudElement(_resultScreen, true);
+    }
 
+    public void RestartHUDElements(){
+        ActivateHudElement(_resultScreen, false);
+        _currentRunCoins = 0;
+        currentScore = 0;
+        _currentStarCoins = 0;
+    }
+
+    public void RestartRun(){
+        GameManager.RestartRun();
+    }
 }

@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour {
     [SerializeField] private float _screenLeftmostPoint; //can be a constant in the future
 
     [System.NonSerialized] public bool isMoving = true;
-    [SerializeField] private float _baseSpeed;
+    public static float baseSpeed = 1.5f;
     public float speedMultiplier = 1;
     private List<GameObject> _currentAreas = new List<GameObject>();
     [SerializeField] private float _distanceToFirstArea;
@@ -23,17 +23,20 @@ public class MapGenerator : MonoBehaviour {
 
     private void Start() {
         // Generates the first terrain and some upcoming ones.
-        for(int i = 0; i < 3; i++)  GenerateNewArea();
+        GenerateStartArea();
 
         //GenerateArea(new Vector3(9, 0, 0));
         //GenerateArea(new Vector3(27, 0, 0));
     }
 
+    public void GenerateStartArea(){
+        for (int i = 0; i < 3; i++) GenerateNewArea();
+    }
+
     private void Update() {
         if (isMoving) {
-            Vector3 displacement = Vector3.left * _baseSpeed * VelocityCalc();
+            Vector3 displacement = Vector3.left * baseSpeed * VelocityCalc();
             foreach (GameObject area in _currentAreas) area.transform.position += displacement;
-
             if (_currentAreas[0].transform.position.x + _currentAreas[0].GetComponent<BoxCollider2D>().size.x / 2 < _screenLeftmostPoint) {
                 GameObject areaToRemove = _currentAreas[0];
                 _currentAreas.Remove(areaToRemove);
@@ -58,6 +61,13 @@ public class MapGenerator : MonoBehaviour {
             :
             Instantiate(area, new Vector3(area.GetComponent<BoxCollider2D>().size.x / 2 + _distanceToFirstArea, 0, 0), Quaternion.identity);
         _currentAreas.Add(instantiatedArea);
+    }
+
+    public void ClearAllAreas(){
+        foreach(GameObject area in _currentAreas){
+            if (area != null) Destroy(area);
+        }
+        _currentAreas.Clear();
     }
 
     public float VelocityCalc() {

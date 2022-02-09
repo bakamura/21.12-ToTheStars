@@ -6,6 +6,7 @@ using UnityEngine;
 public class SaveData {
 
     public int coins;
+    public int starCurrency;
     public int highscore;
     public int[] playerUpgrades;
     public int[] powerupUpgrades;
@@ -18,6 +19,7 @@ public class SaveData {
     public SaveData() {
         coins = GameManager.coins;
         highscore = GameManager.highscore;
+        starCurrency = GameManager.starCurrency;
 
         playerUpgrades = GameManager.playerUpgrades; //
         powerupUpgrades = GameManager.powerupUpgrades; //

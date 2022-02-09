@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable] //
 public class Constellation {
@@ -85,11 +85,14 @@ public class ConstellationManager : MonoBehaviour {
     private GameObject _starBtn;
     public static List<GameObject> _starsActives = new List<GameObject>();
 
-    [SerializeField] private Text _starCurrencyText;
+    [SerializeField] private TextMeshProUGUI _starCurrencyText;
 
     public enum constelationPassives {
-        Speed,
-        CoinValue
+        BreakObstacles,
+        DailyCoal,
+        StartBoost,
+        IncreasePowerUpChance,
+        ExtraLife
     };
 
     public void SetCurrentConstelation(int constellationN) {
@@ -163,10 +166,18 @@ public class ConstellationManager : MonoBehaviour {
         }
     }
 
-    private void ActivateConstelationPassive(constelationPassives passive) {
+    public static void ActivateConstelationPassive(constelationPassives passive) {
         switch (passive) {
-            case constelationPassives.Speed: Debug.Log("speed"); break;
-            case constelationPassives.CoinValue: Debug.Log("CoinValue"); break;
+            case constelationPassives.BreakObstacles: PlayerData.burnObstacles = true; break;
+            case constelationPassives.DailyCoal: 
+                GameManager.dailyDoubleCoins = 1000; 
+                //needs to start a function to calculate time passed since last playtime
+                break;
+            case constelationPassives.StartBoost:
+                LaunchPlayerPassive.isPassiveActive = true;
+                break;
+            case constelationPassives.IncreasePowerUpChance: PowerUp.generateChance += 1; break;
+            case constelationPassives.ExtraLife: PlayerData.extraLife += 1; break;
         }
     }
 

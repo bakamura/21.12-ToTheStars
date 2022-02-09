@@ -5,22 +5,26 @@ using UnityEngine;
 public class CoalCoin : MonoBehaviour {
 
     [SerializeField] private float _lifeIncrease;
-    [SerializeField] private int _coinValue;
+    public static int _coinValue;
     //[SerializeField] private float _velocityIncrease;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") {
-            //if (!PowerUp.isPlayerFlying) {
-            //SceneControl.TilesManager.Instance.VelocityChange(_velocityIncrease);
+            if (!LaunchPlayerPassive.isPlayerFlying) {
+                //SceneControl.TilesManager.Instance.VelocityChange(_velocityIncrease);
 
-            PlayerData.Instance.ChangeHealth(_lifeIncrease);
+                PlayerData.Instance.ChangeHealth(_lifeIncrease);
 
-            int coinAmount = _coinValue + GameManager.playerUpgrades[2];
-            GameManager.coins += coinAmount;
-            HudManager.Instance.ChangeRunCoins(coinAmount);
+                int coinAmount = (_coinValue + GameManager.playerUpgrades[2]);
+                if (GameManager.dailyDoubleCoins > 0) {
+                    coinAmount *= 2;
+                    GameManager.dailyDoubleCoins -= coinAmount;
+                }
+                GameManager.coins += coinAmount;
+                HudManager.Instance.ChangeRunCoins(coinAmount);
 
-            Destroy(gameObject);
-            //}
+                Destroy(gameObject);
+            }
         }
     }
 }

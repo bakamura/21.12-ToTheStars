@@ -17,18 +17,16 @@ public class PowerUp : MonoBehaviour {
         StarCoin
     };
     public PowerUpType _powerUpType;
-    [SerializeField] private float[] _powerUpChance = new float[_totalPowerUps];
+    [NonSerialized] public static int generateChance = 1;
+
+    [SerializeField] private float[] _powerUpChance = new float[5];
     [SerializeField] private Sprite[] _iconsList = new Sprite[_totalPowerUps]; // @
-    [SerializeField] private float[] _baseDurationsList = new float[_totalPowerUps]; // @
-    //[SerializeField] private float _powderKegSpeedIncrease;
-    //[NonSerialized] public static float maxSizePlayerIncreasePowderKeg = 3;
+    [SerializeField] private float[] _baseDurationsList = new float[5];
+
     [SerializeField] private float _MagnetPullForce;
-    [NonSerialized] public static float _shieldDamageReduction = 0;
+    [NonSerialized] public static float _shieldDamageReduction = 1f;
     [NonSerialized] public static int _coinMultiplier = 1;
     [NonSerialized] public static bool isPlayerInvincible = false;
-    [NonSerialized] public static bool isPlayerFlying = false;
-    //[NonSerialized] public Coroutine _changeInSizeCoroutine = null;
-    //private Vector2 _playerSizeBeforeChange;
 
     public float areaKegEff; //
 
@@ -43,7 +41,7 @@ public class PowerUp : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == "Player") {
+        if (collision.tag == "Player" && !LaunchPlayerPassive.isPlayerFlying) {
             if (PowerUpHUDManager.Instance.CreatePowerUpInUI(this)) OnCollectPowerUp.Invoke();
         }
     }
@@ -51,11 +49,11 @@ public class PowerUp : MonoBehaviour {
     public void PowerUpSetup() {
         RandomizePowerUpType();
         srPowerUp.sprite = _iconsList[(int)_powerUpType];
-        powerUpDuration = _baseDurationsList[(int)_powerUpType] * (1 + 0.5f * GameManager.powerupUpgrades[(int) _powerUpType]);
+        powerUpDuration = _powerUpType != PowerUpType.StarCoin ? _baseDurationsList[(int)_powerUpType] * (1 + 0.5f * GameManager.powerupUpgrades[(int)_powerUpType]) : 0;
         SetPowerUpActions();
     }
 
-    private PowerUpType SetPowerUpType(int i){
+    private PowerUpType SetPowerUpType(int i) {
         switch (i) {
             case 0:
                 return _powerUpType = PowerUpType.Magnet;
@@ -76,10 +74,31 @@ public class PowerUp : MonoBehaviour {
     }
 
     private void RandomizePowerUpType() {
-        for (int _currentPowerUpChance = 0; _currentPowerUpChance < _powerUpChance.Length; _currentPowerUpChance++){
-            float randomNumber = UnityEngine.Random.Range(0f, 100f * 2f);
-            if (randomNumber <= _powerUpChance[_currentPowerUpChance]) SetPowerUpType(_currentPowerUpChance);
+        int randomNumber = UnityEngine.Random.Range(0, 4);
+        if (randomNumber >= generateChance) {
+            randomNumber = UnityEngine.Random.Range(0, 100);
+            switch (randomNumber) {
+                case int i when i < _powerUpChance[0]://
+                    SetPowerUpType((int)PowerUpType.Magnet);
+                    break;
+                case int i when i < _powerUpChance[1]:
+                    SetPowerUpType((int)PowerUpType.PowderKeg);
+                    break;
+                case int i when i < _powerUpChance[2]:
+                    SetPowerUpType((int)PowerUpType.Invincibility);
+                    break;
+                case int i when i < _powerUpChance[3]:
+                    SetPowerUpType((int)PowerUpType.Shield);
+                    break;
+                case int i when i < _powerUpChance[4]:
+                    SetPowerUpType((int)PowerUpType.CoinMultiplier);
+                    break;
+                default:
+                    SetPowerUpType((int)PowerUpType.StarCoin);
+                    break;
+            }
         }
+        else Destroy(this.gameObject);
     }
 
     private void SetPowerUpActions() {
@@ -116,16 +135,15 @@ public class PowerUp : MonoBehaviour {
         this.GetComponent<Collider2D>().enabled = false;
         StartCoroutine(this.MagnetEffect());
     }
-    private IEnumerator MagnetEffect(){
-        while (true)
-        {
+    private IEnumerator MagnetEffect() {
+        while (true) {
             Collider2D[] hits = Physics2D.OverlapCircleAll(PlayerData.Instance.transform.position, 5);
-            foreach(Collider2D obj in hits) {
-                if(obj.tag == "Coal"){
+            foreach (Collider2D obj in hits) {
+                if (obj.tag == "Coal") {
                     obj.GetComponent<Rigidbody2D>().velocity = (PlayerData.Instance.transform.position - obj.transform.position).normalized * _MagnetPullForce;
                 }
             }
-            yield return new WaitForSeconds(Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -135,56 +153,17 @@ public class PowerUp : MonoBehaviour {
     }
 
     private void StartPowderKeg() {
-        Collider2D[] hits = Physics2D.OverlapBoxAll(PlayerData.Instance.transform.position, new Vector2(areaKegEff, 10), 0);
-        foreach (Collider2D obj in hits) if (obj.tag == "Obstacle") Destroy(obj.gameObject);
+        DestroyObjectsAroundPlayer(areaKegEff);
         Destroy(this.gameObject);
-        //a way to make the canon upgrade
-        //PlayerData.Instance.isFlying = true;
-        //MapGenerator.Instance._powderKegSpeedIncrease = _powderKegSpeedIncrease;
-        //PlayerMovement.Instance.ChangeSize(true);
     }
 
-    //public void ChangeSize(bool increaseSize)
-    //{
-    //    if (_changeInSizeCoroutine == null)
-    //    {
-    //        _changeInSizeCoroutine = StartCoroutine(this.ChangeSizeEffectPowderKeg(increaseSize));
-    //    }
-    //}
-
-    //private IEnumerator ChangeSizeEffectPowderKeg(bool increaseSize)
-    //{
-    //    Vector2 changeInScale = Vector2.zero;
-    //    if (increaseSize)
-    //    {
-    //        _playerSizeBeforeChange = new Vector2(PlayerData.Instance.transform.localScale.x, PlayerData.Instance.transform.localScale.y);
-    //        changeInScale = _playerSizeBeforeChange;
-    //        while (transform.localScale.x < PowerUp.maxSizePlayerIncreasePowderKeg && transform.localScale.y < PowerUp.maxSizePlayerIncreasePowderKeg)
-    //        {
-    //            changeInScale += new Vector2(.05f, .05f);
-    //            transform.localScale = changeInScale;
-    //            yield return new WaitForSeconds(Time.fixedDeltaTime);
-    //        }
-    //        _changeInSizeCoroutine = null;
-    //    }
-    //    else
-    //    {
-    //        changeInScale = PlayerData.Instance.transform.localScale;
-    //        while (transform.localScale.x > _playerSizeBeforeChange.x && transform.localScale.y > _playerSizeBeforeChange.y)
-    //        {
-    //            changeInScale -= new Vector2(.1f, .1f);
-    //            transform.localScale = changeInScale;
-    //            yield return new WaitForSeconds(Time.fixedDeltaTime);
-    //        }
-    //        _changeInSizeCoroutine = null;
-    //    }
-    //}
+    public static void DestroyObjectsAroundPlayer(float area) {
+        Collider2D[] hits = Physics2D.OverlapBoxAll(PlayerData.Instance.transform.position, new Vector2(area, 10), 0);
+        foreach (Collider2D obj in hits) if (obj.tag == "Obstacle") Destroy(obj.gameObject);
+    }
 
     private void FinishPowderKeg() {
-        //a way to make the canon upgrade
-        //PlayerMovement.Instance.ChangeSize(false);
-        //MapGenerator.Instance._powderKegSpeedIncrease = 0f;
-        //PlayerData.Instance.isFlying = false;
+
     }
 
     private void StartInvincibility() {
@@ -201,7 +180,7 @@ public class PowerUp : MonoBehaviour {
     }
 
     private void FinishShield() {
-        _shieldDamageReduction = 0;
+        _shieldDamageReduction = 1f;
     }
     private void StartCoinMultipier() {
         _coinMultiplier = 2;
@@ -212,7 +191,7 @@ public class PowerUp : MonoBehaviour {
         _coinMultiplier = 1;
     }
 
-    private void StarCoin(){
-        GameManager.starCurrency++;
+    private void StarCoin() {
+        HudManager.Instance._currentStarCoins++;
     }
 }
