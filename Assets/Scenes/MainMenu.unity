@@ -7128,8 +7128,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: -130, y: 0}
+  m_AnchoredPosition: {x: 27.5, y: 0}
+  m_SizeDelta: {x: -175, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253967108
 MonoBehaviour:
@@ -7150,7 +7150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 123456
+  m_text: 1234567
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7263,7 +7263,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 384, y: 192}
+  m_SizeDelta: {x: 480, y: 192}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1267942383
 MonoBehaviour:
@@ -7294,7 +7294,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.33
 --- !u!222 &1267942384
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10184,7 +10184,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1922559788}
   - component: {fileID: 1922559786}
-  - component: {fileID: 1922559787}
   m_Layer: 5
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -10204,35 +10203,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &1922559787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922559785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0dc9a221fb5762409ae875de3230cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameoneConstellation:
-    stars: 000000000000
-    constelationPassive: 0
-  nametwoConstellation:
-    stars: 00000000000000
-    constelationPassive: 1
-  namethreeConstellation:
-    stars: 00000000
-    constelationPassive: 0
-  namefourConstellation:
-    stars: 000000000000
-    constelationPassive: 0
-  namefiveConstellation:
-    stars: 0000000000
-    constelationPassive: 0
-  currentConstellation: -1
-  _starCurrencyText: {fileID: 0}
 --- !u!224 &1922559788
 RectTransform:
   m_ObjectHideFlags: 0
