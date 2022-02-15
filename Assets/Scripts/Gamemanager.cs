@@ -6,7 +6,7 @@ public static class GameManager {
 
     public static int coins;
     public static int highscore;
-    public static int starCurrency = 100;
+    public static int starCurrency = 25;
     public static int dailyDoubleCoins;
 
     public static int[] playerUpgrades = new int[5];

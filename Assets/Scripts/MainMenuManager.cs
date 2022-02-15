@@ -1,34 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
-    public CanvasGroup mainMenu;
-    public CanvasGroup upgradeMenu;
-    public CanvasGroup constellationMenu;
-    public CanvasGroup settingsMenu;
+    public CanvasGroup[] menus;
 
-    public void OpenUpgradeMenu() {
-        HudManager.ActivateHudElement(upgradeMenu, true);
-        HudManager.ActivateHudElement(mainMenu, false);
+    public void OpenMenuBtn(CanvasGroup canvasOpen) {
+        for (int i = 0; i < menus.Length; i++) HudManager.ActivateHudElement(menus[i], menus[i] == canvasOpen);
     }
 
-    public void OpenConstellationMenu() {
-        HudManager.ActivateHudElement(constellationMenu, true);
-        HudManager.ActivateHudElement(mainMenu, false);
-    }
-
-    public void OpenSettingsMenu() {
-        HudManager.ActivateHudElement(settingsMenu, true);
-        HudManager.ActivateHudElement(mainMenu, false);
-    }
-
-    public void CloseMenu() {
-        HudManager.ActivateHudElement(mainMenu, true);
-        HudManager.ActivateHudElement(upgradeMenu, false);
-        HudManager.ActivateHudElement(constellationMenu, false);
-        HudManager.ActivateHudElement(settingsMenu, false);
+    public void PlayBtn() {
+        SceneManager.LoadScene(1);
+        // Make constellations and upgrades change game values.
     }
 
 }
