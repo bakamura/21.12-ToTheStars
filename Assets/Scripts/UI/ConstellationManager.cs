@@ -133,7 +133,8 @@ public class ConstellationManager : MonoBehaviour {
                 _starBtn.GetComponentInChildren<Animator>().SetTrigger("ACTIVATE");
                 _starsActives.Add(_starBtn);
 
-                if (alreadyLitStars == constelation.stars.Length - 1) ActivateConstelationPassive(constelation.constelationPassive);
+                if (alreadyLitStars == constelation.stars.Length - 1) 
+                    ActivateConstelationPassive(constelation.constelationPassive);
 
                 constelation.stars[starN] = true;
 
@@ -179,6 +180,7 @@ public class ConstellationManager : MonoBehaviour {
             case constelationPassives.IncreasePowerUpChance: PowerUp.generateChance += 1; break;
             case constelationPassives.ExtraLife: PlayerData.extraLife += 1; break;
         }
+        Debug.Log("Passive " + passive.ToString() + " Activated");
     }
 
     IEnumerator UpdateStarCurrencyText(float add_subtract) {

@@ -11,7 +11,7 @@ public class LaunchPlayerPassive : MonoBehaviour {
     private const float maxSizePlayerIncreasePowderKeg = 5;
     private Vector2 _playerSizeBeforeChange;
     [NonSerialized] public static bool isPlayerFlying = false;
-    [NonSerialized] public static bool isPassiveActive = true;
+    [NonSerialized] public static bool isPassiveActive = false;
     // Start is called before the first frame update
     private void Awake() {
         if (Instance == null) Instance = this;
