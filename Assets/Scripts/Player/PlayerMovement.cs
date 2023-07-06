@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 finalHeight = Vector3.up * _laneHeights[currentLane];
         float currentTransition = 0;
         while (true) {
-            currentTransition += Time.deltaTime * _baseTimeToSwitchLane / MapGenerator.Instance.VelocityCalc();
+            currentTransition += Time.deltaTime * _baseTimeToSwitchLane / MapGenerator.baseSpeed * MapGenerator.Instance.VelocityCalc();
             if (currentTransition > 1) currentTransition = 1;
             transform.position = Vector3.Lerp(initialHeight, finalHeight, currentTransition);
             if (currentTransition >= 1) break;
@@ -86,5 +86,10 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         _isMoving = false;
+    }
+
+    private void OnEnable() {
+        transform.position = new Vector3(transform.position.x, _laneHeights[1], 0);
+        currentLane = 1;
     }
 }

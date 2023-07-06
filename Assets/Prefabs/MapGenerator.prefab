@@ -46,7 +46,15 @@ MonoBehaviour:
   _presetArea:
   - {fileID: 7668624778746343472, guid: 331a1491de21681429518d3be1a67e25, type: 3}
   - {fileID: 8867849735362089826, guid: 5a3a5ae2b1e46ce43b1dd850cdcff2a0, type: 3}
+  - {fileID: 456459076224077672, guid: 61cd1cab7d0739548a1e2c039f0b2ba8, type: 3}
+  - {fileID: 6953958947951663383, guid: f43a4c6a6fc0ac4469a478e856adf40f, type: 3}
+  - {fileID: 5165618615558775018, guid: f8c8dfdae1ed43d41b579f39f4d23676, type: 3}
+  - {fileID: 7503150485462392159, guid: 84a52f40653ba1c4d84c2f3d43338cd3, type: 3}
+  - {fileID: 6255763109487056709, guid: 16da3cc79106f7c4bb11a00c4393a92e, type: 3}
+  - {fileID: 677273102613345752, guid: 8d52483d27034274f8c984da34e13a8c, type: 3}
+  - {fileID: 9173691344816322314, guid: c583ab89b4d389a46b9c040e1c1440d0, type: 3}
+  - {fileID: 4129846388412580450, guid: 473298c3fe2dd00449fb378530cecdac, type: 3}
   _screenLeftmostPoint: -9
-  _baseSpeed: 1.5
+  isMoving: 1
   speedMultiplier: 3
   _distanceToFirstArea: 9

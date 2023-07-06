@@ -30,8 +30,8 @@ public class PlayerData : MonoBehaviour {
     private void Update() {
         if (currentHealth > 0)
         {
-            HudManager.Instance.ChangeScore(baseScoreIncrease * MapGenerator.Instance.VelocityCalc()); //
-            if (!PowerUp.isPlayerInvincible) ChangeHealth(-healthLoss * MapGenerator.Instance.VelocityCalc());
+            HudManager.Instance.ChangeScore(baseScoreIncrease * MapGenerator.Instance.VelocityCalc() * Time.deltaTime); //
+            if (!PowerUp.isPlayerInvincible) ChangeHealth(-healthLoss * MapGenerator.Instance.VelocityCalc() * Time.deltaTime);
         }
         else Die();
     }
@@ -58,6 +58,7 @@ public class PlayerData : MonoBehaviour {
         HudManager.Instance.ResultScreen();/**/
         PlayerMovement.Instance.enabled = false;
         MapGenerator.Instance.isMoving = false;
+        ParallaxTile.Instance.isMoving = false;
         PowerUpHUDManager.Instance.ClearUI();
         this.enabled = false; //
     }

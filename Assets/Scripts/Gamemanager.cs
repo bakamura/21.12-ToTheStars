@@ -26,6 +26,7 @@ public static class GameManager {
         MapGenerator.Instance.GenerateStartArea();
         PlayerData.Instance.RestartPlayer();
         MapGenerator.Instance.isMoving = true;
+        ParallaxTile.Instance.isMoving = true;
         LaunchPlayerPassive.Instance.Activate();
     }
 
