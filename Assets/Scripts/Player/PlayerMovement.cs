@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour {
     private bool _isMoving;
     private float _targetHeight;
 
+    [SerializeField] private float[] _laneHeights;
+    private int currentLane = 1;
+
     private void Awake() {
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
@@ -53,13 +56,13 @@ public class PlayerMovement : MonoBehaviour {
                     float dragAngle = Mathf.Atan2(dragDirection.y, dragDirection.x) * Mathf.Rad2Deg;
                     if (dragAngle > 45 && dragAngle < 135) {
                         // Debug.Log("Swiped Up");
-                        if (!_isMoving && transform.position.y < 2) StartCoroutine(MoveTowardsHeight(2));
+                        if (!_isMoving && currentLane > 0) StartCoroutine(MoveTowardsHeight(true));
                         _isTrackingTouch = false;
                         return;
                     }
                     else if (dragAngle < -45 && dragAngle > -135) {
                         // Debug.Log("Swiped Down");
-                        if (!_isMoving && transform.position.y > -2) StartCoroutine(MoveTowardsHeight(-2));
+                        if (!_isMoving && currentLane < 2) StartCoroutine(MoveTowardsHeight(false));
                         _isTrackingTouch = false;
                     }
                 }
@@ -67,24 +70,21 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private IEnumerator MoveTowardsHeight(float direction) {
+    private IEnumerator MoveTowardsHeight(bool isUp) {
         _isMoving = true;
 
-        // Direction should be called with the distance between each lane's pivot
-        Debug.Log(new Vector2(direction /* * MapGenerator.Instance.VelocityCalc() */ / _baseTimeToSwitchLane, 0));
-        rbPlayer.velocity = new Vector2(direction /* * MapGenerator.Instance.VelocityCalc() */ / _baseTimeToSwitchLane, 0);
-        Debug.Log(rbPlayer.velocity);
+        Vector3 initialHeight = Vector3.up * _laneHeights[currentLane];
+        currentLane += isUp ? 1 : 0;
+        Vector3 finalHeight = Vector3.up * _laneHeights[currentLane];
+        float currentTransition = 0;
+        while (true) {
+            currentTransition += Time.deltaTime * _baseTimeToSwitchLane / MapGenerator.Instance.VelocityCalc();
+            if (currentTransition > 1) currentTransition = 1;
+            transform.position = Vector3.Lerp(initialHeight, finalHeight, currentTransition);
+            if (currentTransition >= 1) break;
+            yield return null;
+        }
 
-        //for (int i = 0; i < 60; i++) { // WaitForSeconds doesn't properly work when float is too small
-        //    transform.position += new Vector3(0, direction / 60, 0);
-
-        //    yield return new WaitForSeconds(timeToSwitchLane);
-        //} 
-
-        yield return new WaitForSeconds(_baseTimeToSwitchLane /* / MapGenerator.Instance.VelocityCalc() */);
-
-        rbPlayer.velocity = Vector2.zero;
-        transform.position = new Vector3(transform.position.x, (int)transform.position.y, 0);
         _isMoving = false;
     }
 }
