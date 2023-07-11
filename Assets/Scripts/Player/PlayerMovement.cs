@@ -34,6 +34,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update() {
         DetectMovement();
+#if UNITY_EDITOR
+        if (!_isMoving && Input.GetKeyDown(KeyCode.UpArrow) && currentLane > 0) StartCoroutine(MoveTowardsHeight(true));
+        if (!_isMoving && Input.GetKeyDown(KeyCode.DownArrow) && currentLane < 2) StartCoroutine(MoveTowardsHeight(false));
+#endif
     }
 
     private void DetectMovement() {
@@ -55,13 +59,11 @@ public class PlayerMovement : MonoBehaviour {
                     Vector3 dragDirection = _touchCurrentPos - _touchInitialPos;
                     float dragAngle = Mathf.Atan2(dragDirection.y, dragDirection.x) * Mathf.Rad2Deg;
                     if (dragAngle > 45 && dragAngle < 135) {
-                        // Debug.Log("Swiped Up");
                         if (!_isMoving && currentLane > 0) StartCoroutine(MoveTowardsHeight(true));
                         _isTrackingTouch = false;
                         return;
                     }
                     else if (dragAngle < -45 && dragAngle > -135) {
-                        // Debug.Log("Swiped Down");
                         if (!_isMoving && currentLane < 2) StartCoroutine(MoveTowardsHeight(false));
                         _isTrackingTouch = false;
                     }
@@ -74,11 +76,13 @@ public class PlayerMovement : MonoBehaviour {
         _isMoving = true;
 
         Vector3 initialHeight = Vector3.up * _laneHeights[currentLane];
-        currentLane += isUp ? 1 : 0;
+        initialHeight[0] = transform.position.x;
+        currentLane += isUp ? -1 : 1;
         Vector3 finalHeight = Vector3.up * _laneHeights[currentLane];
+        finalHeight[0] = transform.position.x;
         float currentTransition = 0;
         while (true) {
-            currentTransition += Time.deltaTime * _baseTimeToSwitchLane / MapGenerator.baseSpeed * MapGenerator.Instance.VelocityCalc();
+            currentTransition += Time.deltaTime * MapGenerator.baseSpeed * MapGenerator.Instance.VelocityCalc() / _baseTimeToSwitchLane;
             if (currentTransition > 1) currentTransition = 1;
             transform.position = Vector3.Lerp(initialHeight, finalHeight, currentTransition);
             if (currentTransition >= 1) break;

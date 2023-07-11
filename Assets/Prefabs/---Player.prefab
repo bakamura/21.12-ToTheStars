@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragScreenPercentage: 0.15
-  _baseTimeToSwitchLane: 1
+  _baseTimeToSwitchLane: 0.5
   _laneHeights:
   - -0.25
   - -2.25

@@ -99,8 +99,8 @@ public class HudManager : MonoBehaviour {
         // Return to the main menu
     }
 
-    public void SettingsBtn(bool active) {
-        ActivateHudElement(_settingsMenu, active);
+    public void SettingsBtn() {
+        ActivateHudElement(_settingsMenu, !_settingsMenu.interactable);
     }
 
     public void MusicSlider(float volume) {

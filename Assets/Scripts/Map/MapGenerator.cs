@@ -24,9 +24,6 @@ public class MapGenerator : MonoBehaviour {
     private void Start() {
         // Generates the first terrain and some upcoming ones.
         GenerateStartArea();
-
-        //GenerateArea(new Vector3(9, 0, 0));
-        //GenerateArea(new Vector3(27, 0, 0));
     }
 
     public void GenerateStartArea(){
@@ -44,10 +41,6 @@ public class MapGenerator : MonoBehaviour {
 
                 GenerateNewArea();
             }
-
-            //if (_currentAreas[_currentAreas.Count - 1].transform.position.x < _distanceToFirstArea) {
-            //    GenerateArea(_currentAreas[_currentAreas.Count - 2].transform.position + new Vector3(_distanceToFirstArea + _presetArea[_currentAreas.Count].GetComponent<BoxCollider2D>().size.x, 0, 0));
-            //}
         }
 
         speedMultiplier += Time.deltaTime / 5; // Test
@@ -57,9 +50,13 @@ public class MapGenerator : MonoBehaviour {
         GameObject area = _presetArea[Random.Range(0, _presetArea.Length)];
         GameObject instantiatedArea;
         instantiatedArea = _currentAreas.Count > 0 ?
-            Instantiate(area, _currentAreas[_currentAreas.Count - 1].transform.position + new Vector3(_currentAreas[_currentAreas.Count - 1].GetComponent<BoxCollider2D>().size.x / 2 + area.GetComponent<BoxCollider2D>().size.x / 2, transform.position.y, 0), Quaternion.identity)
-            :
-            Instantiate(area, new Vector3(area.GetComponent<BoxCollider2D>().size.x / 2 + _distanceToFirstArea, transform.position.y, 0), Quaternion.identity);
+            Instantiate(area,
+            new Vector3(_currentAreas[_currentAreas.Count - 1].transform.position.x + _currentAreas[_currentAreas.Count - 1].GetComponent<BoxCollider2D>().size.x / 2 + area.GetComponent<BoxCollider2D>().size.x / 2, transform.position.y, 0), 
+            Quaternion.identity) :
+
+            Instantiate(area, 
+            new Vector3(area.GetComponent<BoxCollider2D>().size.x / 2 + _distanceToFirstArea, transform.position.y, 0),
+            Quaternion.identity);
         _currentAreas.Add(instantiatedArea);
     }
 
@@ -71,13 +68,6 @@ public class MapGenerator : MonoBehaviour {
     }
 
     public float VelocityCalc() {
-        // Speed multiplier is in sqrt to assure a "caping" nature to the game
         return Mathf.Sqrt(speedMultiplier);
     }
-
-    //private GameObject GenerateArea(Vector3 spawnPosition) {
-    //    GameObject instantiatedArea = Instantiate(_presetArea[Random.Range(0, (_presetArea.Length - 1))], spawnPosition, Quaternion.identity);
-    //    _currentAreas.Add(instantiatedArea);
-    //    return instantiatedArea;
-    //}
 }
