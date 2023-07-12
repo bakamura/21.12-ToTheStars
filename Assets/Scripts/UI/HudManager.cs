@@ -10,6 +10,8 @@ public class HudManager : MonoBehaviour {
     public static HudManager Instance { get; private set; } = null;
 
     [SerializeField] private Image _heathBarFill;
+    [SerializeField] private RectTransform _healthBarEnd;
+    private float _healthBarEndMax;
 
     public static float currentScore = 0;
     [SerializeField] private TextMeshProUGUI _scoreText;
@@ -36,6 +38,7 @@ public class HudManager : MonoBehaviour {
     private void Start() {
         ChangeRunCoins(0);
         ChangeScore(0);
+        _healthBarEndMax = _healthBarEnd.anchoredPosition.x;
 
         ActivateHudElement(_pauseText.GetComponent<CanvasGroup>(), false);
         ActivateHudElement(_settingsMenu.GetComponent<CanvasGroup>(), false);
@@ -43,6 +46,9 @@ public class HudManager : MonoBehaviour {
 
     public void ChangeHealthBarFill(float fillAmount) {
         _heathBarFill.fillAmount = fillAmount;
+        Vector3 v3 = _healthBarEnd.anchoredPosition;
+        v3[0] = fillAmount * _healthBarEndMax;
+        _healthBarEnd.anchoredPosition = v3;
     }
 
     public void ChangeScore(float amount) {
@@ -128,6 +134,7 @@ public class HudManager : MonoBehaviour {
     public void RestartHUDElements(){
         ActivateHudElement(_resultScreen, false);
         _currentRunCoins = 0;
+        ChangeRunCoins(0);
         currentScore = 0;
         _currentStarCoins = 0;
     }

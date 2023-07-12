@@ -56,5 +56,7 @@ MonoBehaviour:
   - {fileID: 4129846388412580450, guid: 473298c3fe2dd00449fb378530cecdac, type: 3}
   _screenLeftmostPoint: -9
   isMoving: 1
-  speedMultiplier: 3
+  _speedMultiplier: 20
+  currentSpeedMultiplier: 0
+  _speedIncrease: 0.5
   _distanceToFirstArea: 9

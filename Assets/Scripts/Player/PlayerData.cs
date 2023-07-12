@@ -30,8 +30,8 @@ public class PlayerData : MonoBehaviour {
     private void Update() {
         if (currentHealth > 0)
         {
-            HudManager.Instance.ChangeScore(baseScoreIncrease * MapGenerator.Instance.VelocityCalc() * Time.deltaTime); //
-            if (!PowerUp.isPlayerInvincible) ChangeHealth(-healthLoss * MapGenerator.Instance.VelocityCalc() * Time.deltaTime);
+            HudManager.Instance.ChangeScore(baseScoreIncrease * MapGenerator.baseSpeed * MapGenerator.Instance.VelocityCalc() * Time.deltaTime); //
+            if (!PowerUp.isPlayerInvincible) ChangeHealth(-healthLoss * MapGenerator.baseSpeed * MapGenerator.Instance.VelocityCalc() * Time.deltaTime);
         }
         else Die();
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CoalCoin : MonoBehaviour {
 
     [SerializeField] private float _lifeIncrease;
-    public static int _coinValue;
+    public static int _coinValue = 1;
     //[SerializeField] private float _velocityIncrease;
 
     private void OnTriggerEnter2D(Collider2D collision) {

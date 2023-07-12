@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  healthLoss: 3
+  healthLoss: 1
 --- !u!114 &1569301485934287630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragScreenPercentage: 0.15
-  _baseTimeToSwitchLane: 0.5
+  _baseTimeToSwitchLane: 1
   _laneHeights:
   - -0.25
   - -2.25

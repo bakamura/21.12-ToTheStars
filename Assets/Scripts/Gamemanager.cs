@@ -22,11 +22,11 @@ public static class GameManager {
 
     public static void RestartRun(){
         MapGenerator.Instance.ClearAllAreas();
-        HudManager.Instance.RestartHUDElements();
         MapGenerator.Instance.GenerateStartArea();
-        PlayerData.Instance.RestartPlayer();
         MapGenerator.Instance.isMoving = true;
         ParallaxTile.Instance.isMoving = true;
+        HudManager.Instance.RestartHUDElements();
+        PlayerData.Instance.RestartPlayer();
         LaunchPlayerPassive.Instance.Activate();
     }
 

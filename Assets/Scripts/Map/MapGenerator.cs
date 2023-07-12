@@ -11,8 +11,10 @@ public class MapGenerator : MonoBehaviour {
     [SerializeField] private float _screenLeftmostPoint; //can be a constant in the future
 
     [HideInInspector] public bool isMoving = true;
-    public static float baseSpeed = 1.5f;
-    public float speedMultiplier = 1;
+    public static float baseSpeed = .75f;
+    [SerializeField] private float _speedMultiplier;
+    public float currentSpeedMultiplier;
+    [SerializeField] private float _speedIncrease;
     private List<GameObject> _currentAreas = new List<GameObject>();
     [SerializeField] private float _distanceToFirstArea;
 
@@ -24,6 +26,7 @@ public class MapGenerator : MonoBehaviour {
     private void Start() {
         // Generates the first terrain and some upcoming ones.
         GenerateStartArea();
+        currentSpeedMultiplier = _speedMultiplier;
     }
 
     public void GenerateStartArea(){
@@ -43,7 +46,7 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
-        speedMultiplier += Time.deltaTime / 5; // Test
+        currentSpeedMultiplier += Time.deltaTime * _speedIncrease; // Test
     }
 
     private void GenerateNewArea() {
@@ -65,9 +68,11 @@ public class MapGenerator : MonoBehaviour {
             if (area != null) Destroy(area);
         }
         _currentAreas.Clear();
+
+        currentSpeedMultiplier = _speedMultiplier;
     }
 
     public float VelocityCalc() {
-        return Mathf.Sqrt(speedMultiplier);
+        return Mathf.Sqrt(currentSpeedMultiplier);
     }
 }
