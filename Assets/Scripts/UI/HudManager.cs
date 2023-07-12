@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class HudManager : MonoBehaviour {
 
@@ -29,6 +30,10 @@ public class HudManager : MonoBehaviour {
     [SerializeField] private CanvasGroup _homeBtn;
     [SerializeField] private CanvasGroup _settingsMenu;
     [SerializeField] private CanvasGroup _resultScreen; /**/
+
+    [Header("Settings")]
+
+    [SerializeField] private AudioMixer _mixer;
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -109,12 +114,14 @@ public class HudManager : MonoBehaviour {
         ActivateHudElement(_settingsMenu, !_settingsMenu.interactable);
     }
 
-    public void MusicSlider(float volume) {
-        // Change vol based on "volume" input
+    public void MusicToggle() {
+        _mixer.GetFloat("MUSIC", out float f);
+        _mixer.SetFloat("MUSIC", f < 0 ? 0 : -80);
     }
 
-    public void FxSlider(float volume) {
-        // Change vol based on "volume" input
+    public void SfxToggle() {
+        _mixer.GetFloat("SFX", out float f);
+        _mixer.SetFloat("SFX", f < 0 ? 0 : -80);
     }
 
     public static void ActivateHudElement(CanvasGroup canvas, bool active) {
