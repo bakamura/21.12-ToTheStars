@@ -21,7 +21,7 @@ TextureImporter:
       213: -8782630278900417779
     second: hud_main_menu_8
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -41,6 +41,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -72,10 +73,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -243,13 +248,13 @@ TextureImporter:
       name: hud_main_menu_5
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
-        width: 128
-        height: 64
+        x: 68
+        y: 81
+        width: 108
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 42, y: 20, z: 19, w: 20}
+      border: {x: 38, y: 3, z: 3, w: 3}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -285,13 +290,13 @@ TextureImporter:
       name: hud_main_menu_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 128
-        height: 64
+        x: 68
+        y: 12
+        width: 108
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 33, y: 0, z: 3, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
