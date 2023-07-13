@@ -16,4 +16,8 @@ public class MainMenuManager : MonoBehaviour {
         // Make constellations and upgrades change game values.
     }
 
+    public void TryBuyUpgrade(int upgrade /* make enum */) {
+        // Stuff
+    }
+
 }
