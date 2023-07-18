@@ -58,5 +58,5 @@ MonoBehaviour:
   isMoving: 1
   _speedMultiplier: 20
   currentSpeedMultiplier: 0
-  _speedIncrease: 0.5
+  _speedIncrease: 2
   _distanceToFirstArea: 9
