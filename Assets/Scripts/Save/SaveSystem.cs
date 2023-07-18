@@ -8,7 +8,7 @@ public static class SaveSystem {
 
     public static void SaveData() {
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(Application.persistentDataPath + "/Save.monke", FileMode.Create);
+        FileStream stream = new FileStream(Application.persistentDataPath + "/Save.zash", FileMode.Create);
 
         SaveData data = new SaveData();
 
@@ -17,7 +17,7 @@ public static class SaveSystem {
     }
 
     public static SaveData LoadData() {
-        string path = Application.persistentDataPath + "/Save.monke";
+        string path = Application.persistentDataPath + "/Save.zash";
         if (File.Exists(path)) {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
@@ -33,7 +33,7 @@ public static class SaveSystem {
     }
 
     public static void DeleteData() {
-        string path = Application.persistentDataPath + "/Save.monke";
+        string path = Application.persistentDataPath + "/Save.zash";
         if (File.Exists(path)) File.Delete(path);
         else Debug.LogWarning("DeleteError: No Save Data was Found!");
     }

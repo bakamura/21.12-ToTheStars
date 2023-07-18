@@ -1106,23 +1106,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3403331722634068346, guid: 147edfb6a5a532c4a8077d4765acfb4c,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a65cf2122a294204896ab813baa9ab90,
-        type: 3}
-    - target: {fileID: 4442807983473017024, guid: 147edfb6a5a532c4a8077d4765acfb4c,
-        type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5934288499489762651, guid: 147edfb6a5a532c4a8077d4765acfb4c,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 03d921bbd6626db4887fa2ebc07dd3b9,
-        type: 3}
     - target: {fileID: 6359751477151153601, guid: 147edfb6a5a532c4a8077d4765acfb4c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1232,11 +1215,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HUD
-      objectReference: {fileID: 0}
-    - target: {fileID: 9194939252567292327, guid: 147edfb6a5a532c4a8077d4765acfb4c,
-        type: 3}
-      propertyPath: m_Colors.m_DisabledColor.a
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 147edfb6a5a532c4a8077d4765acfb4c, type: 3}
