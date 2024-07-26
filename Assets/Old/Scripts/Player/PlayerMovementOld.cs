@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovementOld : MonoBehaviour {
 
-    public static PlayerMovement Instance { get; private set; } = null;
+    public static PlayerMovementOld Instance { get; private set; } = null;
 
     [System.NonSerialized] public Rigidbody2D rbPlayer;
 

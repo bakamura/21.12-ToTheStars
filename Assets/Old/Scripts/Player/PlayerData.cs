@@ -56,7 +56,7 @@ public class PlayerData : MonoBehaviour {
     private void Die() {
         Debug.Log("Player Died"); //
         HudManager.Instance.ResultScreen();/**/
-        PlayerMovement.Instance.enabled = false;
+        PlayerMovementOld.Instance.enabled = false;
         MapGenerator.Instance.isMoving = false;
         ParallaxTile.Instance.isMoving = false;
         PowerUpHUDManager.Instance.ClearUI();
@@ -65,7 +65,7 @@ public class PlayerData : MonoBehaviour {
 
     public void RestartPlayer(){
         this.enabled = true; //
-        PlayerMovement.Instance.enabled = true;
+        PlayerMovementOld.Instance.enabled = true;
         currentHealth = (float)(maxHealth * (0.5f + 0.05 * GameManager.playerUpgrades[1]));
         animPlayer.SetTrigger("Restart");
     }

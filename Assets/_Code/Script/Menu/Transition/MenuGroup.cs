@@ -39,6 +39,11 @@ namespace Naka.UI {
             _transitionCoroutine = null;
         }
 
+        public void CloseCurrent() {
+            _currentMenu?.Close();
+            _currentMenu = null;
+        }
+
         public void SetSelected(GameObject selectedObject) {
             EventSystem.current.SetSelectedGameObject(selectedObject);
         }

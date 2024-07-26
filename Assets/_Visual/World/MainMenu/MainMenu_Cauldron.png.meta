@@ -206,7 +206,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: campfire-caldron_0
+      name: MainMenu_Cauldron_0
       rect:
         serializedVersion: 2
         x: 0
@@ -220,14 +220,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6cc97baf0c39a7b0800000000000000
-      internalID: -5212569055705576341
+      spriteID: 37a9b5d1585949d41bc89002fcc21aa9
+      internalID: -1418046704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: campfire-caldron_1
+      name: MainMenu_Cauldron_1
       rect:
         serializedVersion: 2
         x: 64
@@ -241,14 +241,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe17f7ae6c0275e70800000000000000
-      internalID: 9103781210462581231
+      spriteID: 6b4122ffaa722e14cb8717c92d83d7cb
+      internalID: 351328266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: campfire-caldron_2
+      name: MainMenu_Cauldron_2
       rect:
         serializedVersion: 2
         x: 128
@@ -262,14 +262,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbac5667a3aafe610800000000000000
-      internalID: 1652726756339468988
+      spriteID: e7b542e0474db6e429cd5f558b90b3c2
+      internalID: 1335063200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: campfire-caldron_3
+      name: MainMenu_Cauldron_3
       rect:
         serializedVersion: 2
         x: 192
@@ -283,14 +283,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8f29ec4a1d233860800000000000000
-      internalID: 7508394594739498893
+      spriteID: 2c6b4b9e4701a75488d7f5bcd2c46106
+      internalID: -741300245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: campfire-caldron_4
+      name: MainMenu_Cauldron_4
       rect:
         serializedVersion: 2
         x: 256
@@ -304,14 +304,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7160877fc5397840800000000000000
-      internalID: 5222264408092205438
+      spriteID: f7e7673a02bb01c4bb36588a114e0602
+      internalID: 100864013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: campfire-caldron_5
+      name: MainMenu_Cauldron_5
       rect:
         serializedVersion: 2
         x: 320
@@ -325,8 +325,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 571e7a70659733740800000000000000
-      internalID: 5130577810907718005
+      spriteID: 0e57fe47e1afdb645add8edd8257f8c4
+      internalID: -889147569
       vertices: []
       indices: 
       edges: []
@@ -342,12 +342,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      campfire-caldron_0: -5212569055705576341
-      campfire-caldron_1: 9103781210462581231
-      campfire-caldron_2: 1652726756339468988
-      campfire-caldron_3: 7508394594739498893
-      campfire-caldron_4: 5222264408092205438
-      campfire-caldron_5: 5130577810907718005
+      MainMenu_Cauldron_0: -1418046704
+      MainMenu_Cauldron_1: 351328266
+      MainMenu_Cauldron_2: 1335063200
+      MainMenu_Cauldron_3: -741300245
+      MainMenu_Cauldron_4: 100864013
+      MainMenu_Cauldron_5: -889147569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

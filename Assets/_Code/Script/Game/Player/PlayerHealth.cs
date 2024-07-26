@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Naka;
@@ -19,16 +20,20 @@ namespace Stars.Player {
 
         [SerializeField, Min(0)] private float _decayRate;
 
-        private void Update() {
-            Decay();
+        private void Start() {
+            StartCoroutine(Decay());
         }
 
-        private void Decay() {
-            TakeDamage(_decayRate * Time.deltaTime);
+        private IEnumerator Decay() {
+            while (_healthCurrent > 0) {
+                TakeDamage(_decayRate * Time.deltaTime);
+
+                yield return null;
+            }
         }
 
         public void TakeDamage(float damage) {
-            if (damage > 0) {
+            if (damage >= 0) {
                 _healthCurrent -= damage;
                 OnHealthChange.Invoke(_healthCurrent);
                 if (_healthCurrent <= 0) OnDeath.Invoke();
@@ -37,7 +42,7 @@ namespace Stars.Player {
         }
 
         public void TakeHeal(float heal) {
-            if (heal > 0) {
+            if (heal >= 0) {
                 _healthCurrent = Mathf.Clamp(_healthCurrent + heal, 0, HealthMax);
                 OnHealthChange.Invoke(_healthCurrent);
             }
