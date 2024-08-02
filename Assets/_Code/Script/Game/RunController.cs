@@ -6,26 +6,34 @@ namespace Stars.Game {
     public class RunController : Singleton<RunController> {
 
         public Run CurrentRun { get; private set; }
-        private bool _isInRun;
+        public bool IsInRun { get; private set; }
         [SerializeField, Min(0)] private float _scoreGain;
 
         protected override void Awake() {
             base.Awake();
 
             DontDestroyOnLoad(this);
+            StopRun();
+        }
+
+        private void Start() {
+            RunStarter.OnPlayerEntryEnd.AddListener(NewRun);
+            PlayerHealth.OnDeath.AddListener(StopRun);
         }
 
         private void Update() {
-            if (_isInRun) CurrentRun.AddScore(_scoreGain * PlayerMovement.Instance.SpeedCurrent * Time.deltaTime);
+            if (IsInRun) CurrentRun.AddScore(_scoreGain * PlayerMovement.Instance.SpeedCurrent * Time.deltaTime);
         }
 
-        public void NewRun() {
-            CurrentRun = new Run();
-            _isInRun = true;
+        private void NewRun() {
+            IsInRun = true;
         }
 
         public void StopRun() {
-            _isInRun = false;
+            IsInRun = false;
+            CurrentRun = new Run();
+            CurrentRun.AddScore(0);
+            CurrentRun.AddCurrency(0);
         }
 
     }

@@ -32,11 +32,11 @@ namespace Stars.UI {
 
             yield return _coverWait;
 
-            AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            //AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
 
-            yield return asyncOperation;
+            //yield return asyncOperation;
 
-            asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
             yield return asyncOperation;
 

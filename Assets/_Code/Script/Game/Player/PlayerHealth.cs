@@ -6,8 +6,8 @@ using Naka;
 namespace Stars.Player {
     public class PlayerHealth : Singleton<PlayerHealth> {
 
-        public UnityEvent<float> OnHealthChange { get; private set; } = new UnityEvent<float>();
-        public UnityEvent OnDeath { get; private set; } = new UnityEvent();
+        public static UnityEvent<float> OnHealthChange { get; private set; } = new UnityEvent<float>();
+        public static UnityEvent OnDeath { get; private set; } = new UnityEvent();
 
         [Header("Health")]
 

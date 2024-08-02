@@ -1,5 +1,6 @@
 using UnityEngine;
 using Naka;
+using Stars.Game;
 
 namespace Stars.Player {
     public class PlayerMovement : Singleton<PlayerMovement> {
@@ -43,9 +44,11 @@ namespace Stars.Player {
         }
 
         private void Update() {
-            SwitchLaneUpdate();
-            SpeedUpdate();
-            //Debug.Log($"SpeedCurrent {SpeedCurrent}");
+            if (RunController.Instance.IsInRun) {
+                SwitchLaneUpdate();
+                SpeedUpdate();
+                //Debug.Log($"SpeedCurrent {SpeedCurrent}");
+            }
         }
 
         private void SwitchLaneUpdate() {

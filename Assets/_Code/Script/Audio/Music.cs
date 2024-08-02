@@ -9,6 +9,8 @@ namespace Stars.Audio {
         private AudioSource _musicSource;
 
         protected override void Awake() {
+            base.Awake();
+
             _musicSource = GetComponent<AudioSource>();
 
             DontDestroyOnLoad(gameObject);

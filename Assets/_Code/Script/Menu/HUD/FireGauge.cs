@@ -10,7 +10,7 @@ namespace Stars.UI {
         [SerializeField] private Image _gaugeFill;
 
         private void Awake() {
-            PlayerHealth.Instance.OnHealthChange.AddListener(GaugeUpdate);
+            PlayerHealth.OnHealthChange.AddListener(GaugeUpdate);
         }
 
         private void GaugeUpdate(float value) {
