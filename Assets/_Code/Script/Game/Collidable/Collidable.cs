@@ -5,8 +5,9 @@ namespace Stars.Game {
 
         protected abstract void Collide();
 
-        protected void OnCollisionEnter2D(Collision2D collision) {
+        protected void OnTriggerEnter2D(Collider2D collider) {
             Collide();
+            Destroy(gameObject); // Provisory
         }
 
     }
